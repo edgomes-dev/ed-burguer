@@ -12,15 +12,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "address")
+@Table(name = "tb_address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String name;
+
     private String street;
 
-    private Long number;
+    private String number;
 
     private String complement;
 

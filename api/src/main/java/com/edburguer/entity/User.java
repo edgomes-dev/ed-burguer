@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "users")
+@Table(name = "tb_user")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +25,8 @@ public class User implements Serializable {
     private String email;
 
     private String password;
+
+    private Boolean administrator = false;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,orphanRemoval = true)
     private List<Address> addresses;

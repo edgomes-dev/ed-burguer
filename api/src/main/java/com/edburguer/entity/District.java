@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,18 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "districts")
+@Table(name = "tb_district")
 public class District implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "districts_id")
     private Long id;
 
     private String name;
 
     @Column(name = "delivery_price")
-    private String deliveryPrice;
+    private Float deliveryPrice;
 
     @OneToMany(mappedBy = "district", fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Address> address;
+    private List<Address> address = new ArrayList<>();
 }

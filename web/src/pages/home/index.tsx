@@ -3,12 +3,12 @@ import { CardListComponent, FooterComponent, MenuComponent } from "../../compone
 import backgroundImage from "/public/images/burguer-home-background.jpg"
 import { CardItemComponent } from "../../components/cardItem";
 
-export function Home() {
+export function HomePage() {
   return (
     <S.Container>
       <MenuComponent />
       <S.Image src={backgroundImage} />
-      <CardListComponent />
+      <CardListComponent title="Mais vendidos" />
       <FooterComponent />
     </S.Container>
   )

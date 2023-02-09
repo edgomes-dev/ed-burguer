@@ -1,18 +1,19 @@
 import * as S from "./styles"
+import { BsCart2 } from "react-icons/bs"
 
 export function MenuComponent() {
   return (
     <S.Container>
-      <S.Icone><span>Ed</span> Burguer</S.Icone>
+      <S.Icone><a href="/"><span>Ed</span> Burguer</a> </S.Icone>
       <ul>
-        <li>Bebidas</li>
-        <li>Lanches</li>
-        <li>Pizzas</li>
-        <li>Cardápio completo</li>
+        <li><a href="#">Bebidas</a></li>
+        <li><a href="#">Lanches</a></li>
+        <li><a href="#">Pizzas</a></li>
+        <li><a href="#">Cardápio completo</a></li>
       </ul>
       <div>
-        <p>Carrinho</p>
-        <button>Meus pedidos</button>
+        <BsCart2 size={28} />
+        <a href="#">Meus pedidos</a>
       </div>
     </S.Container>
   )

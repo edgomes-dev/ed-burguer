@@ -1,8 +1,8 @@
 package com.edburguer.resource;
 
-import com.edburguer.dto.AddressDto;
-import com.edburguer.entity.Address;
-import com.edburguer.service.AddressService;
+import com.edburguer.dto.UserDto;
+import com.edburguer.entity.User;
+import com.edburguer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/address")
-public class AddressResource {
+@RestController()
+@RequestMapping("/user")
+public class UserResource {
     @Autowired
-    private AddressService addressService;
-
+    private UserService userService;
     @PostMapping
-    public ResponseEntity<Address> create(@RequestBody AddressDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.create(dto));
+    public ResponseEntity<User> create(@RequestBody UserDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.create(dto));
     }
 }

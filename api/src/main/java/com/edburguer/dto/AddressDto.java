@@ -1,7 +1,7 @@
 package com.edburguer.dto;
 
-import com.edburguer.entity.District;
 import com.edburguer.entity.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,11 +14,12 @@ public class AddressDto {
 
     private String street;
 
-    private Long number;
+    private String number;
 
     private String complement;
 
-    private District district;
+    @JsonProperty(namespace = "district_id")
+    private Long districtId;
 
     private User user;
 }

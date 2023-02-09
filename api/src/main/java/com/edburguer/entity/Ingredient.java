@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -13,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ingredient")
+@Table(name = "tb_ingredient")
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,5 +25,5 @@ public class Ingredient {
     private Float price;
 
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 }

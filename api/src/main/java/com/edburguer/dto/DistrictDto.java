@@ -18,5 +18,5 @@ public class DistrictDto {
     private String name;
 
     @NotNull
-    private String deliveryPrice;
+    private Float deliveryPrice;
 }
