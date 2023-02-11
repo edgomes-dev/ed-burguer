@@ -2,7 +2,6 @@ package com.edburguer.service;
 
 import com.edburguer.dto.DistrictDto;
 import com.edburguer.entity.District;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

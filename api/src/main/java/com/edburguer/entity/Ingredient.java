@@ -24,6 +24,6 @@ public class Ingredient {
 
     private Float price;
 
-    @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
-    private Set<Product> products = new HashSet<>();
+//    @ManyToMany(mappedBy = "ingredients")
+//    private Set<Product> products = new HashSet<>();
 }

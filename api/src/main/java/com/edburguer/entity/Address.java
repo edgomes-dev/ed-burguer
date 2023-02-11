@@ -1,9 +1,6 @@
 package com.edburguer.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "tb_address")
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -26,11 +23,11 @@ public class Address {
 
     private String complement;
 
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "district_id")
     private District district;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 }

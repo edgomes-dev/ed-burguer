@@ -1,13 +1,11 @@
 package com.edburguer.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -15,9 +13,9 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable {
+public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -28,6 +26,6 @@ public class User implements Serializable {
 
     private Boolean administrator = false;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,orphanRemoval = true)
-    private List<Address> addresses;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private Set<Address> address = new HashSet<>();
 }

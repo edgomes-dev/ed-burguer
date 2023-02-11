@@ -27,15 +27,15 @@ public class Product {
 
     private Float price;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "tb_ingredient_product",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private Set<Ingredient> ingredients = new HashSet<>();
+    Set<Ingredient> ingredients = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 }

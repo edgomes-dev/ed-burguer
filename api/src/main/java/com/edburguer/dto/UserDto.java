@@ -15,4 +15,6 @@ public class UserDto {
 
     @NotBlank
     private String password;
+
+    private Boolean administrator;
 }

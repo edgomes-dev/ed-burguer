@@ -23,7 +23,4 @@ public class ProductCategory {
 
     @Column(name = "image_url")
     private String imageUrl;
-
-    @OneToMany(mappedBy = "productCategory", fetch = FetchType.LAZY)
-    private List<Product> products;
 }
