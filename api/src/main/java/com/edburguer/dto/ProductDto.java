@@ -1,6 +1,5 @@
 package com.edburguer.dto;
 
-import com.edburguer.entity.ProductCategory;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class ProductDto {
 
     private Float price;
 
-    List<IngredientDto> ingredients = new ArrayList<>();
+    private List<Long> ingredientsId = new ArrayList<>();
 
     private Long productCategoryId;
 }

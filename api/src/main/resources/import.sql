@@ -19,15 +19,15 @@ INSERT INTO tb_product (name, image_url, price, product_category_id) VALUES ('AÃ
 INSERT INTO tb_product (name, image_url, price, product_category_id) VALUES ('Pastel Misto', '', 5.0, 2);
 INSERT INTO tb_product (name, image_url, price, product_category_id) VALUES ('Hamburguer Amor', '', 22.0, 3);
 
-INSERT INTO tb_ingredient (name, price) VALUES (1, 'Morango', 0.0);
-INSERT INTO tb_ingredient (name, price) VALUES (2, 'Banana', 0.0);
-INSERT INTO tb_ingredient (name, price) VALUES (3, 'Uva', 0.0);
-INSERT INTO tb_ingredient (name, price) VALUES (4, 'Queijo', 0.0);
-INSERT INTO tb_ingredient (name, price) VALUES (5, 'Calabresa', 0.0);
+INSERT INTO tb_ingredient (name, price) VALUES ('Morango', 0.0);
+INSERT INTO tb_ingredient (name, price) VALUES ('Banana', 0.0);
+INSERT INTO tb_ingredient (name, price) VALUES ('Uva', 0.0);
+INSERT INTO tb_ingredient (name, price) VALUES ('Queijo', 0.0);
+INSERT INTO tb_ingredient (name, price) VALUES ('Calabresa', 0.0);
 
-INSERT INTO tb_ingredient_product (product_id, ingredient_id) VALUES (1, 1);
-INSERT INTO tb_ingredient_product (product_id, ingredient_id) VALUES (1, 2);
-INSERT INTO tb_ingredient_product (product_id, ingredient_id) VALUES (1, 3);
-INSERT INTO tb_ingredient_product (product_id, ingredient_id) VALUES (2, 4);
-INSERT INTO tb_ingredient_product (product_id, ingredient_id) VALUES (2, 5);
-INSERT INTO tb_ingredient_product (product_id, ingredient_id) VALUES (3, 4);
+INSERT INTO tb_ingredients_products (product_fk, ingredient_fk) VALUES (1, 1);
+INSERT INTO tb_ingredients_products (product_fk, ingredient_fk) VALUES (1, 2);
+INSERT INTO tb_ingredients_products (product_fk, ingredient_fk) VALUES (1, 3);
+INSERT INTO tb_ingredients_products (product_fk, ingredient_fk) VALUES (2, 4);
+INSERT INTO tb_ingredients_products (product_fk, ingredient_fk) VALUES (2, 5);
+INSERT INTO tb_ingredients_products (product_fk, ingredient_fk) VALUES (3, 4);

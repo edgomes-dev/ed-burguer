@@ -11,4 +11,8 @@ public interface AddressService {
     List<Address> findAll();
 
     Address findById(Long id);
+
+    Address update(AddressDto dto);
+
+    void delete(Long id);
 }

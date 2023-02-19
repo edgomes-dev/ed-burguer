@@ -29,4 +29,16 @@ public class UserResource {
     public ResponseEntity<User> findById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
+
+    @PutMapping
+    public ResponseEntity<User> update(@RequestBody UserDto dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.update(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        userService.delete(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
 }

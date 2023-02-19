@@ -68,4 +68,18 @@ public class AddressServiceImpl implements AddressService {
 
         return address.get();
     }
+
+    @Override
+    public Address update(AddressDto dto) {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Address> address = addressRepository.findById(id);
+
+        if(address.isEmpty()) throw new NotFoundException("address não encontrado");
+
+        addressRepository.delete(address.get());
+    }
 }

@@ -1,14 +1,30 @@
-version: '3.1'
+version: '3.2'
 
 services:
-
   postgres:
     image: postgres
+    container_name: database
     ports:
       - 5432:5432
     restart: always
     environment:
       POSTGRES_ROOT_PASSWORD: senha123
-      POSTGRES_DATABASE: ED_BURGUER
+      POSTGRES_DATABASE: POSTGRES
       POSTGRES_USER: ed
-      POSTGRES_PASSWORD: senha123
+      POSTGRES_PASSWORD: senha123         
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:20.0.3
+    environment:	
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_USERNAME=ed
+      - KC_DB_PASSWORD=senha123
+      - KC_DB_URL_HOST=postgres
+      - KC_DB_URL_PORT=5432
+    ports:
+      - 8085:8085
+    command: start-dev --http-port=8085        
+    depends_on:
+      - postgres

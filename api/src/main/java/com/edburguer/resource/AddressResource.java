@@ -30,4 +30,9 @@ public class AddressResource {
     public ResponseEntity<Address> findById(@PathVariable("id") Long id) {
         return  ResponseEntity.status(HttpStatus.OK).body(addressService.findById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
 }

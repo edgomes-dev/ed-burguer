@@ -1,29 +1,28 @@
 package com.edburguer.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "products")
 @Builder
 @Entity
 @Table(name = "tb_ingredient")
 public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     private Float price;
 
-//    @ManyToMany(mappedBy = "ingredients")
-//    private Set<Product> products = new HashSet<>();
+    @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Product> products;
 }

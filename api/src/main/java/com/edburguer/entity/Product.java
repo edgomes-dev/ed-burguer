@@ -1,12 +1,13 @@
 package com.edburguer.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,7 +18,7 @@ import java.util.Set;
 @Table(name = "tb_product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -27,13 +28,13 @@ public class Product {
 
     private Float price;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(
-            name = "tb_ingredient_product",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+            name = "tb_ingredients_products",
+            joinColumns = @JoinColumn(name = "product_fk", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_fk", referencedColumnName = "id")
     )
-    Set<Ingredient> ingredients = new HashSet<>();
+    private List<Ingredient> ingredients;
 
     @ManyToOne()
     @JoinColumn(name = "product_category_id")
