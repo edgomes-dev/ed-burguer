@@ -3,6 +3,7 @@ package com.edburguer.service.impl;
 import com.edburguer.dto.DistrictDto;
 import com.edburguer.entity.District;
 import com.edburguer.exception.BadRequestException;
+import com.edburguer.exception.NotFoundException;
 import com.edburguer.mapper.DistrictMapper;
 import com.edburguer.repository.DistrictRepository;
 import com.edburguer.service.DistrictService;
@@ -37,6 +38,8 @@ public class DistrictServiceImpl implements DistrictService {
     @Override
     public District findById(Long id) {
         Optional<District> district = districtRepository.findById(id);
+
+        if(district.isEmpty()) throw new NotFoundException("esse ID é inválido");
         return district.get();
     }
 

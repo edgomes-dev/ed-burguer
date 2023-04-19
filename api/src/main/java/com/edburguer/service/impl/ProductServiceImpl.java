@@ -7,11 +7,13 @@ import com.edburguer.entity.ProductCategory;
 import com.edburguer.exception.NotFoundException;
 import com.edburguer.mapper.ProductMapper;
 import com.edburguer.repository.ProductRepository;
+import com.edburguer.service.FirebaseService;
 import com.edburguer.service.IngredientService;
 import com.edburguer.service.ProductCategoryService;
 import com.edburguer.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -29,16 +31,20 @@ public class ProductServiceImpl implements ProductService {
     public Product create(ProductDto productDto) {
         ProductCategory productCategory = productCategoryService.findById(productDto.getProductCategoryId());
 
+        if(!productDto.getFile().isEmpty()) {
+            System.out.println("Arquivo existe");
+        }
+
+        String fileUrl = "https://pbs.twimg.com/media/FiRRfNfXEAMCwmk.jpg";
+
         List<Ingredient> ingredients = new ArrayList<>();
         for(Long ingredientId: productDto.getIngredientsId()) {
             Ingredient ingredient = ingredientService.findById(ingredientId);
             ingredients.add(ingredient);
         }
 
-        System.out.println(ingredients);
-
         return productRepository
-                .save(ProductMapper.fromDtoToEntity(productDto,ingredients ,productCategory));
+                .save(ProductMapper.fromDtoToEntity(productDto, ingredients, productCategory, fileUrl));
     }
 
     @Override

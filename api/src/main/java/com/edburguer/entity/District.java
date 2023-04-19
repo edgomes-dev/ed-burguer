@@ -23,8 +23,5 @@ public class District {
     private String name;
 
     @Column(name = "delivery_price")
-    private Float deliveryPrice;
-
-//    @OneToMany(mappedBy = "district", fetch = FetchType.LAZY)
-//    private Set<Address> address = new HashSet<>();
+    private Double deliveryPrice;
 }

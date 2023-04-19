@@ -1,7 +1,9 @@
 package com.edburguer.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class ProductDto {
 
     private String name;
 
-    private String imageUrl;
+    private MultipartFile file;
 
     private Float price;
 
