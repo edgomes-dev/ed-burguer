@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/district")
@@ -18,29 +19,26 @@ public class DistrictResource {
     private DistrictService districtService;
 
     @PostMapping
-    public ResponseEntity<District> create(@Valid @RequestBody DistrictDto dto) {
-        return  ResponseEntity.status(HttpStatus.CREATED).body(districtService.create(dto));
+    public ResponseEntity<DistrictDto> create(@RequestBody DistrictDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(districtService.create(dto));
     }
 
     @GetMapping
-    public ResponseEntity<List<District>> findAll() {
+    public ResponseEntity<List<DistrictDto>> findAll() {
         return  ResponseEntity.status(HttpStatus.OK).body(districtService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<District> findById(@PathVariable("id") Long id) {
-        return  ResponseEntity.status(HttpStatus.OK).body(districtService.findById(id));
+    public ResponseEntity<DistrictDto> findById(@PathVariable("id") Long id) {
+        DistrictDto response = districtService.findById(id);
+
+        if(Objects.isNull(response)) ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping
-    public ResponseEntity<District> update(@Valid @RequestBody DistrictDto dto) {
+    public ResponseEntity<DistrictDto> update(@Valid @RequestBody DistrictDto dto) {
         return  ResponseEntity.status(HttpStatus.OK).body(districtService.update(dto));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        districtService.delete(id);
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 }

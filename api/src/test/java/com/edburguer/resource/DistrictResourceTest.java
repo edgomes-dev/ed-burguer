@@ -2,178 +2,119 @@ package com.edburguer.resource;
 
 import com.edburguer.dto.DistrictDto;
 import com.edburguer.entity.District;
-import com.edburguer.mapper.DistrictMapper;
+import com.edburguer.exception.NotFoundException;
 import com.edburguer.service.DistrictService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Assertions;
+import org.hamcrest.core.Is;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(DistrictResource.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class DistrictResourceTest {
-    @Autowired
-    private MockMvc mockMvc;
-
     @MockBean
-    DistrictService service;
+    private DistrictService service;
+
+    @Autowired
+    private  MockMvc mockMvc;
 
     @Test
-    @DisplayName("Criar com sucesso um distrito")
-    public void shouldCreateDistrictSucess() throws Exception {
-        // arrange
+    @DisplayName("Criar com sucesso um district")
+    void testPostCreateDistrict() throws Exception {
+        DistrictDto districtToPost = new DistrictDto(null, "Test", 3.0);
+        DistrictDto districtToReturn = new DistrictDto(1L, "Test", 3.0);
+        Mockito.doReturn(districtToReturn).when(service).create(any());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/district")
+                .content(asJsonString(districtToPost))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id", Is.is(1)));
+    }
+
+    @Test
+    @DisplayName("Retornar os districts com sucesso")
+    void testGetAllDistricts() throws Exception {
+        List<District> list = new ArrayList<>();
+
+        District district = new District();
+        district.setId(1L);
+        district.setName("Test");
+        district.setDeliveryPrice(3.0);
+
+        District district1 = new District();
+        district1.setId(2L);
+        district1.setName("Test One");
+        district1.setDeliveryPrice(4.0);
+
+        list.add(district);
+        list.add(district1);
+
+        Mockito.doReturn(list).when(service).findAll();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/district"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id", Is.is(1)))
+                .andExpect(jsonPath("$[0].name", Is.is("Test")))
+                .andExpect(jsonPath("$[0].deliveryPrice", Is.is(3.0)))
+                .andExpect(jsonPath("$[1].id", Is.is(2)))
+                .andExpect(jsonPath("$[1].name", Is.is("Test One")))
+                .andExpect(jsonPath("$[1].deliveryPrice", Is.is(4.0)));
+    }
+
+    @Test
+    @DisplayName("Retornar um district com sucesso quando o ID for válido")
+    void testGetDistrictById() throws Exception {
         DistrictDto districtDto = new DistrictDto();
+        districtDto.setId(1L);
         districtDto.setName("Test");
         districtDto.setDeliveryPrice(3.0);
 
-        //Mockito.when(service.create(districtDto)).thenReturn(DistrictMapper.fromDtoToEntity(districtDto));
+        Mockito.doReturn(districtDto).when(service).findById(1L);
 
-        // action
-        mockMvc.perform(MockMvcRequestBuilders.post("/district")
-                .content(asJsonString(districtDto)))
-                .andExpect(status().isCreated())
-                .andDo(print());
-
-        // assertions
-        //String resultDistrict = result.getResponse().getContentAsString();
-        //Assertions.assertNotNull(resultDistrict);
-        //Assertions.assertEquals(resultDistrict, resultDistrict);
+        mockMvc.perform(MockMvcRequestBuilders.get("/district/{id}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id", Is.is(1)))
+                .andExpect(jsonPath("$.name", Is.is("Test")))
+                .andExpect(jsonPath("$.deliveryPrice", Is.is(3.0)));
     }
 
     @Test
-    @DisplayName("Retornar com sucesso todos os distritos")
-    public void shouldReturnAllDistrictsSucess() throws Exception {
-        // arrange
-        List<District> list = new ArrayList<>();
-        District district1 = new District();
-        district1.setId(1L);
-        district1.setName("Test One");
-        district1.setDeliveryPrice(3.0);
+    @DisplayName("Retornar um NotFound quando o ID for inválido")
+    void testGetDistrictByIdFail() throws Exception {
+        Mockito.doThrow(NotFoundException.class).when(service).findById(1L);
 
-        District district2 = new District();
-        district2.setId(2L);
-        district2.setName("Test Two");
-        district2.setDeliveryPrice(5.0);
-
-        list.add(district1);
-        list.add(district2);
-
-        Mockito.when(service.findAll()).thenReturn(list);
-
-
-
-        // action and assertions
-        mockMvc.perform(MockMvcRequestBuilders.get("/district"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", Matchers.hasSize(2)))
-                .andExpect(jsonPath("$[0].name", Matchers.is("Test One"))
-                );
-
+        mockMvc.perform(MockMvcRequestBuilders.get("/district/{id}", 1L))
+                .andExpect(status().isNotFound());
     }
 
-    @Test
-    @DisplayName("Retornar com sucesso um distrito por id")
-    public void shouldReturnFindByIdSucess() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/district")
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.district").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.district[*].id").isNotEmpty());
-    }
-
-    @Test
-    @DisplayName("Atualizar com sucesso um distrito")
-    public void shouldUpdateDistrictSucess() throws Exception {
-        // arrange
-        List<District> list = new ArrayList<>();
-        District district1 = new District();
-        district1.setId(1L);
-        district1.setName("Test One");
-        district1.setDeliveryPrice(3.0);
-
-        District district2 = new District();
-        district2.setId(2L);
-        district2.setName("Test Two");
-        district2.setDeliveryPrice(5.0);
-
-        list.add(district1);
-        list.add(district2);
-
-        DistrictDto districtDto = new DistrictDto();
-        districtDto.setId(1L);
-        districtDto.setName("Test One New");
-        districtDto.setDeliveryPrice(3.5);
-
-        Mockito.when(service.update(districtDto)).thenReturn(DistrictMapper.fromDtoToEntity(districtDto));
-
-        // action and assertions
-        mockMvc.perform(MockMvcRequestBuilders.get("/district")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .content(String.valueOf(districtDto))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Test One New"));
-    }
-
-    public static String asJsonString(final Object obj) {
+    static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 }
-
-/*
-
-// arrange
-        List<District> list = new ArrayList<>();
-        District district1 = new District();
-        district1.setId(1L);
-        district1.setName("Test One");
-        district1.setDeliveryPrice(3.0);
-
-        District district2 = new District();
-        district2.setId(2L);
-        district2.setName("Test Two");
-        district2.setDeliveryPrice(5.0);
-
-        list.add(district1);
-        list.add(district2);
-
-        Long id = 1L;
-
-        Mockito.when(service.findById(id)).thenReturn(list.get(id.intValue() - 1));
-
-
-
-        // action and assertions
-        mockMvc.perform(MockMvcRequestBuilders.get("/district/{id}", 1)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1));
-
- */

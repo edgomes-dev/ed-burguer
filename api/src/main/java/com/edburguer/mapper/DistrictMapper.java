@@ -11,4 +11,12 @@ public class DistrictMapper {
                 .deliveryPrice(dto.getDeliveryPrice())
                 .build();
     }
+
+    public  static DistrictDto fromEntityToDto(District district) {
+        return DistrictDto.builder()
+                .id(district.getId())
+                .name(district.getName())
+                .deliveryPrice(district.getDeliveryPrice())
+                .build();
+    }
 }

@@ -6,13 +6,11 @@ import com.edburguer.entity.District;
 import java.util.List;
 
 public interface DistrictService {
-    District create(DistrictDto dto);
+    DistrictDto create(DistrictDto dto);
 
-    List<District> findAll();
+    List<DistrictDto> findAll();
 
-    District findById(Long id);
+    DistrictDto findById(Long id);
 
-    District update(DistrictDto dto);
-
-    void delete(Long id);
+    DistrictDto update(DistrictDto dto);
 }

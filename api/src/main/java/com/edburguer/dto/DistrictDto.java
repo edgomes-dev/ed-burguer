@@ -1,5 +1,6 @@
 package com.edburguer.dto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class DistrictDto {
     private Long id;
 

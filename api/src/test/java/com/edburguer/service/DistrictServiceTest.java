@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -42,7 +43,7 @@ public class DistrictServiceTest {
         Mockito.doReturn(district).when(repository).save(any());
 
         // action
-        District returnDistrict = service.create(districtDto);
+        DistrictDto returnDistrict = service.create(districtDto);
 
         // assertions
         Assertions.assertNotNull(returnDistrict, "The saved district should not be null");
@@ -65,7 +66,7 @@ public class DistrictServiceTest {
         Mockito.doReturn(Arrays.asList(district, district2)).when(repository).findAll();
 
         // action
-        List<District> returnDistrict = service.findAll();
+        List<DistrictDto> returnDistrict = service.findAll();
 
         // assertions
         Assertions.assertEquals(2, returnDistrict.size(), "findAll should return 2 widgets");
@@ -81,14 +82,16 @@ public class DistrictServiceTest {
         district.setName("Teste");
         district.setDeliveryPrice(3.0);
 
+        DistrictDto districtDto = DistrictMapper.fromEntityToDto(district);
+
         Mockito.doReturn(Optional.of(district)).when(repository).findById(idExists);
 
         // action
-        Optional<District> returnDistrict = Optional.ofNullable(service.findById(idExists));
+        Optional<DistrictDto> returnDistrict = Optional.ofNullable(service.findById(idExists));
 
         // assertions
         Assertions.assertTrue(returnDistrict.isPresent(), "District was not found");
-        Assertions.assertSame(returnDistrict.get(), district, "The district returned was not the same as the mock");
+        Assertions.assertEquals(returnDistrict.get(), districtDto, "The district returned was not the same as the mock");
     }
 
     @Test
@@ -102,7 +105,7 @@ public class DistrictServiceTest {
         Executable executable = new Executable() {
             @Override
             public void execute() throws Throwable {
-                Optional<District> returnDistrict = Optional.ofNullable(service.findById(idInvalid));
+                DistrictDto returnDistrict = service.findById(idInvalid);
             }
         };
 
@@ -125,11 +128,10 @@ public class DistrictServiceTest {
         Mockito.doReturn(Optional.of(district)).when(repository).findById(districtDto.getId());
 
         // action
-        District returnDistrict = service.update(districtDto);
+        DistrictDto returnDistrict = service.update(districtDto);
 
         // assertions
-        Assertions.assertEquals(returnDistrict, district);
-        Assertions.assertSame(returnDistrict, district);
+        Assertions.assertEquals(returnDistrict, districtDto);
     }
 
     @Test
@@ -141,19 +143,15 @@ public class DistrictServiceTest {
         districtDto.setName("Test");
         districtDto.setDeliveryPrice(3.0);
 
-        District district = DistrictMapper.fromDtoToEntity(districtDto);
-
-        Mockito.doReturn(district).when(repository).save(any());
-
         // action
         Executable executable = new Executable() {
             @Override
             public void execute() throws Throwable {
-                District returnDistrict = service.update(districtDto);
+                DistrictDto returnDistrict = service.update(districtDto);
             }
         };
 
         // assertions
-        Assertions.assertThrows(BadRequestException.class, executable);
+        Assertions.assertThrows(NotFoundException.class, executable);
     }
 }

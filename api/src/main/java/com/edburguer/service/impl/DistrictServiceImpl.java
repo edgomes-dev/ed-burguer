@@ -22,41 +22,39 @@ public class DistrictServiceImpl implements DistrictService {
     private DistrictRepository districtRepository;
 
     @Override
-    public District create(DistrictDto dto) {
+    public DistrictDto create(DistrictDto dto) {
         if(Objects.nonNull(dto.getId())) throw  new BadRequestException("id deve ser nulo");
 
-        District district = DistrictMapper.fromDtoToEntity(dto);
+        District district = districtRepository.save(DistrictMapper.fromDtoToEntity(dto));
 
-        return districtRepository.save(district);
+        return DistrictMapper.fromEntityToDto(district);
     }
 
     @Override
-    public List<District> findAll() {
-        return districtRepository.findAll();
+    public List<DistrictDto> findAll() {
+        List<DistrictDto> response = districtRepository.findAll().stream().map(district -> DistrictMapper.fromEntityToDto(district)).toList();
+
+        return  response;
     }
 
     @Override
-    public District findById(Long id) {
+    public DistrictDto findById(Long id) {
         Optional<District> district = districtRepository.findById(id);
 
         if(district.isEmpty()) throw new NotFoundException("esse ID é inválido");
-        return district.get();
+
+        DistrictDto districtDto = DistrictMapper.fromEntityToDto(district.get());
+        return districtDto;
     }
 
     @Override
-    public District update(DistrictDto dto) {
-        Optional<District> district = districtRepository.findById(dto.getId());
-        if(district.isEmpty()) throw new BadRequestException("esse id não é válido");
+    public DistrictDto update(DistrictDto dto) {
+        DistrictDto districtDto = this.findById(dto.getId());
 
-        district.get().setName(dto.getName());
-        district.get().setDeliveryPrice(dto.getDeliveryPrice());
+        districtDto.setName(dto.getName());
+        districtDto.setDeliveryPrice(dto.getDeliveryPrice());
 
-        return districtRepository.save(district.get());
-    }
-
-    @Override
-    public void delete(Long id) {
-        districtRepository.deleteById(id);
+        return DistrictMapper.fromEntityToDto(districtRepository.save(DistrictMapper.fromDtoToEntity(districtDto)));
     }
 }
 
