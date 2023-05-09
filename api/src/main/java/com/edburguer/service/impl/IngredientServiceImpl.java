@@ -48,9 +48,4 @@ IngredientServiceImpl implements IngredientService {
 
         return ingredientRepository.save(ingredient.get());
     }
-
-    @Override
-    public void delete(Long id) {
-        ingredientRepository.deleteById(id);
-    }
 }

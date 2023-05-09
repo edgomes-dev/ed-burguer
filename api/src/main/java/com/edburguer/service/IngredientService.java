@@ -13,6 +13,4 @@ public interface IngredientService {
     Ingredient findById(Long id);
 
     Ingredient update(IngredientDto ingredientDto);
-
-    void delete(Long id);
 }

@@ -36,11 +36,4 @@ public class IngredientResource {
     public ResponseEntity<Ingredient> update(@RequestBody IngredientDto dto) {
         return  ResponseEntity.status(HttpStatus.OK).body(ingredientService.update(dto));
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        ingredientService.delete(id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(null);
-    }
 }
