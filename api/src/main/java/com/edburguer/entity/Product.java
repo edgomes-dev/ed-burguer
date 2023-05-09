@@ -26,7 +26,7 @@ public class Product {
     @Column(name = "image_url")
     private String imageUrl;
 
-    private Float price;
+    private Double price;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(

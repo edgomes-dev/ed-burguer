@@ -1,13 +1,15 @@
 package com.edburguer.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddressDto {
+@Builder
+public class AddressDtoRequest {
     private Long id;
 
     private String name;
@@ -21,4 +23,6 @@ public class AddressDto {
     private Long districtId;
 
     private Long userId;
+
+
 }

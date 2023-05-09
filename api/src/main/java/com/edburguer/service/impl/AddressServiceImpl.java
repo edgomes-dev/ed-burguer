@@ -1,6 +1,7 @@
 package com.edburguer.service.impl;
 
-import com.edburguer.dto.AddressDto;
+import com.edburguer.dto.AddressDtoRequest;
+import com.edburguer.dto.AddressDtoResponse;
 import com.edburguer.entity.Address;
 import com.edburguer.entity.District;
 import com.edburguer.entity.User;
@@ -13,6 +14,7 @@ import com.edburguer.repository.UserRepository;
 import com.edburguer.service.AddressService;
 import com.edburguer.service.DistrictService;
 import com.edburguer.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,42 +38,59 @@ public class AddressServiceImpl implements AddressService {
     private UserRepository userRepository;
 
     @Override
-    public Address create(AddressDto dto) {
+    public AddressDtoResponse create(AddressDtoRequest dto) {
         if(Objects.nonNull(dto.getId())) throw new BadRequestException("id deve ser nulo");
 
-        var districtOpt = districtRepository.findById(dto.getDistrictId());
+        Optional<District> districtFindById = districtRepository.findById(dto.getDistrictId());
 
-        if(districtOpt.isEmpty()) throw  new NotFoundException("Distrito não encontrado");
+        if(districtFindById.isEmpty()) throw  new NotFoundException("Distrito não encontrado");
 
-        var userOpt = userRepository.findById(dto.getUserId());
+        Optional<User> userFindById = userRepository.findById(dto.getUserId());
 
-        if(userOpt.isEmpty()) throw new NotFoundException("User não encontrado");
+        if(userFindById.isEmpty()) throw new NotFoundException("User não encontrado");
 
-        District district = districtOpt.get();
-        User user = userOpt.get();
+        Address addressResponse = addressRepository.save(AddressMapper.fromDtoRequestToEntity(dto, districtFindById.get(), userFindById.get()));
 
-        Address addressEntity = AddressMapper.fromDtoToEntity(dto, district, user);
-
-        return addressRepository.save(addressEntity);
+        return AddressMapper.fromEntityToDtoResponse(addressResponse);
     }
 
     @Override
-    public List<Address> findAll() {
-        return addressRepository.findAll();
+    public List<AddressDtoResponse> findAll() {
+        List<AddressDtoResponse> response = addressRepository.findAll().stream().map(address -> AddressMapper.fromEntityToDtoResponse(address)).toList();
+
+        return response;
     }
 
     @Override
-    public Address findById(Long id) {
+    public AddressDtoResponse findById(Long id) {
         Optional<Address> address = addressRepository.findById(id);
 
         if(address.isEmpty()) throw  new BadRequestException("Endereço não encontrado");
 
-        return address.get();
+        return AddressMapper.fromEntityToDtoResponse(address.get());
     }
 
     @Override
-    public Address update(AddressDto dto) {
-        return null;
+    public AddressDtoResponse update(AddressDtoRequest dto) {
+        AddressDtoResponse entity = this.findById(dto.getId());
+
+        if(Objects.isNull(entity)) throw new NotFoundException("Endereço não encontrato");
+
+        Optional<District> district = districtRepository.findById(dto.getDistrictId());
+        if(district.isEmpty()) throw new NotFoundException("Distrito não encontrado");
+
+        Optional<User> user = userRepository.findById(dto.getUserId());
+        if(user.isEmpty()) throw new NotFoundException("Distrito não encontrado");
+
+        entity.setName(dto.getName());
+        entity.setComplement(dto.getComplement());
+        entity.setNumber(dto.getNumber());
+        entity.setStreet(dto.getStreet());
+        entity.setDistrict(district.get());
+
+        Address address = AddressMapper.fromDtoResponseToEntity(entity, district.get(), user.get());
+
+        return AddressMapper.fromEntityToDtoResponse(addressRepository.save(address));
     }
 
     @Override

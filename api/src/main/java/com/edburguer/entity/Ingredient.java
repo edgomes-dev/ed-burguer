@@ -20,7 +20,7 @@ public class Ingredient {
 
     private String name;
 
-    private Float price;
+    private Double price;
 
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
     @JsonIgnore

@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class IngredientServiceImpl implements IngredientService {
+public class
+IngredientServiceImpl implements IngredientService {
     @Autowired
     IngredientRepository ingredientRepository;
     @Override
@@ -28,7 +30,11 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient findById(Long id) {
-        return ingredientRepository.findById(id).get();
+        Optional<Ingredient> response = ingredientRepository.findById(id);
+
+        if(response.isEmpty()) throw new NotFoundException("Ingredient não encontrado");
+
+        return response.get();
     }
 
     @Override

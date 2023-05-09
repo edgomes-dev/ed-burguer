@@ -2,7 +2,6 @@ package com.edburguer.service;
 
 import com.edburguer.dto.DistrictDto;
 import com.edburguer.entity.District;
-import com.edburguer.exception.BadRequestException;
 import com.edburguer.exception.NotFoundException;
 import com.edburguer.mapper.DistrictMapper;
 import com.edburguer.repository.DistrictRepository;
@@ -17,7 +16,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,9 +32,7 @@ public class DistrictServiceTest {
     @DisplayName("Deve salvar o distrito com sucesso")
     public void should_createDistrictSucess() {
         // arrange
-        DistrictDto districtDto = new DistrictDto();
-        districtDto.setName("Test One");
-        districtDto.setDeliveryPrice(3.0);
+        DistrictDto districtDto = new DistrictDto(null, "Test One", 3.0);
 
         District district = DistrictMapper.fromDtoToEntity(districtDto);
 
@@ -54,7 +50,7 @@ public class DistrictServiceTest {
     @DisplayName("Deve retornar todos os distritos com sucesso")
     public void should_findAllDistrictSucess() {
         // arrange
-        District district = new District();
+        District district = new District(); 
         district.setId(1L);
         district.setName("Test One");
         district.setDeliveryPrice(3.0);
@@ -74,7 +70,7 @@ public class DistrictServiceTest {
 
     @Test
     @DisplayName("Deve retornar um distrito quando o ID for válido")
-    public void should_findByIdDistrictSucess_when_IdExists() {
+    public void should_findByIdDistrictSucess_when_idExists() {
         // arrange
         Long idExists = 1L;
         District district = new District();

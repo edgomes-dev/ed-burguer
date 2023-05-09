@@ -15,7 +15,7 @@ public class ProductDto {
 
     private MultipartFile file;
 
-    private Float price;
+    private Double price;
 
     private List<Long> ingredientsId = new ArrayList<>();
 
