@@ -32,8 +32,6 @@ public class DistrictResource {
     public ResponseEntity<DistrictDto> findById(@PathVariable("id") Long id) {
         DistrictDto response = districtService.findById(id);
 
-        if(Objects.isNull(response)) ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

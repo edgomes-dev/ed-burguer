@@ -72,25 +72,23 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDtoResponse update(AddressDtoRequest dto) {
-        AddressDtoResponse entity = this.findById(dto.getId());
+        Optional<Address> entity = addressRepository.findById(dto.getId());
 
-        if(Objects.isNull(entity)) throw new NotFoundException("Endereço não encontrato");
+        if(entity.isEmpty()) throw new NotFoundException("Endereço não encontrato");
 
         Optional<District> district = districtRepository.findById(dto.getDistrictId());
         if(district.isEmpty()) throw new NotFoundException("Distrito não encontrado");
 
         Optional<User> user = userRepository.findById(dto.getUserId());
-        if(user.isEmpty()) throw new NotFoundException("Distrito não encontrado");
+        if(user.isEmpty()) throw new NotFoundException("User não encontrado");
 
-        entity.setName(dto.getName());
-        entity.setComplement(dto.getComplement());
-        entity.setNumber(dto.getNumber());
-        entity.setStreet(dto.getStreet());
-        entity.setDistrict(district.get());
+        entity.get().setName(dto.getName());
+        entity.get().setComplement(dto.getComplement());
+        entity.get().setNumber(dto.getNumber());
+        entity.get().setStreet(dto.getStreet());
+        entity.get().setDistrict(district.get());
 
-        Address address = AddressMapper.fromDtoResponseToEntity(entity, district.get(), user.get());
-
-        return AddressMapper.fromEntityToDtoResponse(addressRepository.save(address));
+        return AddressMapper.fromEntityToDtoResponse(addressRepository.save(entity.get()));
     }
 
     @Override

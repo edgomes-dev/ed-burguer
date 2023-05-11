@@ -72,7 +72,6 @@ public class DistrictServiceTest {
     @DisplayName("Deve retornar um distrito quando o ID for válido")
     public void should_findByIdDistrictSucess_when_idExists() {
         // arrange
-        Long idExists = 1L;
         District district = new District();
         district.setId(1L);
         district.setName("Teste");
@@ -80,28 +79,27 @@ public class DistrictServiceTest {
 
         DistrictDto districtDto = DistrictMapper.fromEntityToDto(district);
 
-        Mockito.doReturn(Optional.of(district)).when(repository).findById(idExists);
+        Mockito.doReturn(Optional.of(district)).when(repository).findById(1L);
 
         // action
-        Optional<DistrictDto> returnDistrict = Optional.ofNullable(service.findById(idExists));
+        DistrictDto returnDistrict = service.findById(1L);
 
         // assertions
-        Assertions.assertTrue(returnDistrict.isPresent(), "District was not found");
-        Assertions.assertEquals(returnDistrict.get(), districtDto, "The district returned was not the same as the mock");
+        Assertions.assertNotNull(returnDistrict);
+        Assertions.assertEquals(returnDistrict, districtDto);
     }
 
     @Test
     @DisplayName("Deve retornar um erro se o ID for inválido")
     public void should_findByIdDistrictError_when_IdFalseOrNull() {
         // arrange
-        Long idInvalid = 100L;
-        Mockito.doReturn(Optional.empty()).when(repository).findById(idInvalid);
+        Mockito.doReturn(Optional.empty()).when(repository).findById(10L);
 
         // action
         Executable executable = new Executable() {
             @Override
             public void execute() throws Throwable {
-                DistrictDto returnDistrict = service.findById(idInvalid);
+                DistrictDto returnDistrict = service.findById(10L);
             }
         };
 

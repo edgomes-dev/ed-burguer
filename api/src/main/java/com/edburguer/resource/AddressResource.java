@@ -31,8 +31,6 @@ public class AddressResource {
     public ResponseEntity<AddressDtoResponse> findById(@PathVariable("id") Long id) {
         AddressDtoResponse response = addressService.findById(id);
 
-        if(Objects.isNull(response)) ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

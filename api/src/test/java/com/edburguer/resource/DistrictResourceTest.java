@@ -32,6 +32,7 @@ public class DistrictResourceTest {
     @MockBean
     private DistrictService service;
 
+
     @Autowired
     private  MockMvc mockMvc;
 
