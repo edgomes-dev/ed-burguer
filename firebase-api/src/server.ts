@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
 import Multer from "multer";
-import { uploadImage } from "./firebase";
+import { deleteImage, uploadImage } from "./firebase";
 
 const app = express();
 app.use(express.json());
@@ -17,5 +17,7 @@ const multer = Multer({
 app.post("/firebase", multer.single("img"), uploadImage, (req, res) => {
   return res.status(200).json({ data: req.file?.path });
 });
+
+app.delete("/firebase/:url", deleteImage);
 
 app.listen("3333", () => console.log("Servidor Iniciado"));

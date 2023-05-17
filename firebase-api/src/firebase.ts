@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import admin from "firebase-admin";
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 const serviceAccount = require("./config/firebase-key.json");
 
 const bucketAddress = "ed-burguer-ae2c8.appspot.com";
@@ -40,4 +42,19 @@ export const uploadImage = (
   });
 
   stream.end(img.buffer);
+};
+
+const app = initializeApp({
+  storageBucket: bucketAddress,
+});
+const storage = getStorage(app);
+
+export const deleteImage = (req: Request, res: Response) => {
+  let url = req.params.url;
+
+  const imageRef = ref(storage, `${url}`);
+
+  deleteObject(imageRef)
+    .then(() => res.status(200).send("sucess"))
+    .catch((err) => res.status(401).json({ error: err }));
 };
