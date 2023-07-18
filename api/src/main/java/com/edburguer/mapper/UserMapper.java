@@ -10,7 +10,7 @@ public class UserMapper {
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .password(dto.getPassword())
-                .administrator(false)
+                .role(dto.getRole())
                 .build();
     }
 }

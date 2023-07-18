@@ -1,7 +1,9 @@
 package com.edburguer.dto;
 
+import com.edburguer.entity.Role;
 import lombok.Data;
 
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -18,5 +20,5 @@ public class UserDto {
     @NotBlank
     private String password;
 
-    private Boolean administrator;
+    private Role role;
 }

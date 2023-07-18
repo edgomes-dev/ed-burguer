@@ -8,6 +8,9 @@ import com.edburguer.mapper.UserMapper;
 import com.edburguer.repository.UserRepository;
 import com.edburguer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,5 +58,15 @@ public class UserServiceImpl implements UserService {
         if(Objects.isNull(entity)) throw new NotFoundException("User não encontrado");
 
         userRepository.deleteById(entity.getId());
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            }
+        };
     }
 }

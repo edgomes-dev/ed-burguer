@@ -1,6 +1,6 @@
-import "styled-components";
+import 'styled-components';
 
-declare module "styled-components" {
+declare module 'styled-components' {
   export interface DefaultTheme {
     border: {
       radius: string;
@@ -21,15 +21,20 @@ declare module "styled-components" {
       };
     };
     colors: {
-      primary: string;
-      secondary: string;
-      mainBg: string;
-      white: string;
-      black: string;
-      lightGray: string;
-      gray: string;
-      darkGray: string;
+      orange: string;
       red: string;
+      white: string;
+      mainBackground: string;
+      yellow: string;
+      blue: string;
+      text: string;
+      title: string;
+      black: string;
+      gray: {
+        light: string;
+        background: string;
+        dark: string;
+      };
     };
     spacings: {
       xxsmall: string;

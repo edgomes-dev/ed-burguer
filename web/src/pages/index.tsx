@@ -1,5 +1,5 @@
-import { Home } from '@/templates';
+import { HomeTemplate } from '@/templates/HomeTemplate';
 
 export default function myApp() {
-  return <Home />;
+  return <HomeTemplate />;
 }
