@@ -1,6 +1,8 @@
 package com.edburguer.service.impl;
 
 import com.edburguer.dto.UserDto;
+import com.edburguer.dto.request.SignUpRequest;
+import com.edburguer.entity.Role;
 import com.edburguer.entity.User;
 import com.edburguer.exception.BadRequestException;
 import com.edburguer.exception.NotFoundException;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,12 +64,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            }
-        };
+    public void saveAuth(SignUpRequest data) {
+        if(userRepository.findByEmail(data.getEmail()) != null) throw new BadRequestException("Usário com esse e-mail já existe");
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(data.getPassword());
+        User newUser = new User();
+        newUser.setName(data.getName());
+        newUser.setEmail(data.getEmail());
+        newUser.setPassword(encryptedPassword);
+        newUser.setRole(Role.USER);
+
+        userRepository.save(newUser);
     }
 }

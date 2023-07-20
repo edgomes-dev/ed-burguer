@@ -7,26 +7,10 @@ export const Wrapper = styled.div`
   }
 `;
 
-const containerModifiers = {
-  slogan: () => css`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  `,
-  description: () => css`
-    display: block;
-    max-width: 1250px;
-    margin: 0 auto;
-  `
-};
-
 type ContainerProps = Pick<ListContainerProps, 'type'>;
 
-export const Container = styled.div<ContainerProps>`
-  ${({ type }) => css`
-    ${type == 'slogan'
-      ? containerModifiers.slogan
-      : containerModifiers.description}
-
+export const Container = styled.div`
+  ${({ theme }) => css`
     a {
       text-decoration: none;
       color: black;

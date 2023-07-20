@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { ListItemContainer } from '../ListItemContainer';
 import * as S from './styles';
 import { ListItem } from '../ListItem';
 import { FaHamburger as IconHamburger } from 'react-icons/fa';
@@ -31,23 +30,17 @@ export function ListContainer({
         {!!icon && <IconHamburger />}
         {title}
       </h2>
-      <S.Container type={type}>
-        {type === 'slogan'
-          ? items.map(({ text, img, link }: ItemProps) => (
-              <Link key={link} href={link!}>
-                <ListItemContainer img={img} text={text} />
-              </Link>
-            ))
-          : items.map(({ text, img, link, price, description }: ItemProps) => (
-              <Link key={link} href={link!}>
-                <ListItem
-                  text={text}
-                  img={img}
-                  price={price!}
-                  description={description!}
-                />
-              </Link>
-            ))}
+      <S.Container>
+        {items.map(({ text, img, link, price, description }: ItemProps) => (
+          <Link key={link} href={link!}>
+            <ListItem
+              text={text}
+              img={img}
+              price={price!}
+              description={description!}
+            />
+          </Link>
+        ))}
       </S.Container>
     </S.Wrapper>
   );
