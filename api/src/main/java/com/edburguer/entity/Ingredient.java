@@ -22,7 +22,7 @@ public class Ingredient {
 
     private Double price;
 
-    @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
+    /*@ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Product> products;
+    private List<Product> products;*/
 }

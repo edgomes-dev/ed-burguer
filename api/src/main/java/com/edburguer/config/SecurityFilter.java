@@ -1,5 +1,5 @@
 package com.edburguer.config;
-
+/*
 import com.edburguer.repository.UserRepository;
 import com.edburguer.service.UserService;
 import com.edburguer.service.impl.TokenServiceImpl;
@@ -38,6 +38,9 @@ public class SecurityFilter extends OncePerRequestFilter {
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+
+        if("/product-category".equals(request.getServletPath())) return;
+
         filterChain.doFilter(request, response);
     }
 
@@ -47,3 +50,4 @@ public class SecurityFilter extends OncePerRequestFilter {
          return authHeader.replace("Bearer ", "");
     }
 }
+*/

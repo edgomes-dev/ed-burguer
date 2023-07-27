@@ -11,12 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 public class ProductMapper {
-    public static Product fromDtoToEntity(ProductDto dto, List<Ingredient> ingredients, ProductCategory  productCategory, String file) {
+    public static Product fromDtoToEntity(ProductDto dto, ProductCategory  productCategory) {
         return Product.builder()
                 .name(dto.getName())
-                .imageUrl(file)
+                .imageUrl("")
                 .price(dto.getPrice())
-                .ingredients(ingredients)
                 .productCategory(productCategory)
                 .build();
     }

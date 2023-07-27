@@ -1,9 +1,12 @@
 package com.edburguer.dto;
 
+import com.edburguer.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor

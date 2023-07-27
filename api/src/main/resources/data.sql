@@ -11,10 +11,10 @@ INSERT INTO tb_address (name, street, number, complement, district_id, user_id) 
 INSERT INTO tb_address (name, street, number, complement, district_id, user_id) VALUES ('Casa', 'Rua Edson Nieling Lundgren', '10', 'Próximo da Panificadora Praia da Conceição', 3, 3);
 
 
-INSERT INTO tb_product_category (name, image_url) VALUES ('Salgados', '');
-INSERT INTO tb_product_category (name, image_url) VALUES ('Gelados', '');
-INSERT INTO tb_product_category (name, image_url) VALUES ('Pasteis', '');
-INSERT INTO tb_product_category (name, image_url) VALUES ('Hamburgueres', '');
+INSERT INTO tb_product_category (name) VALUES ('Salgados');
+INSERT INTO tb_product_category (name) VALUES ('Gelados');
+INSERT INTO tb_product_category (name) VALUES ('Pasteis');
+INSERT INTO tb_product_category (name) VALUES ('Hamburgueres');
 
 INSERT INTO tb_product (name, image_url, price, product_category_id) VALUES ('Açai', '', 14.0, 1);
 INSERT INTO tb_product (name, image_url, price, product_category_id) VALUES ('Pastel Misto', '', 5.0, 2);

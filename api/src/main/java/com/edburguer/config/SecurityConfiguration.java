@@ -1,5 +1,5 @@
 package com.edburguer.config;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .antMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .antMatchers(HttpMethod.GET, "/product-category").permitAll()
                         .antMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -47,3 +48,4 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 }
+*/

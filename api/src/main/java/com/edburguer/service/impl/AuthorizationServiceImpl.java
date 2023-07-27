@@ -1,5 +1,5 @@
 package com.edburguer.service.impl;
-
+/*
 import com.edburguer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,3 +17,4 @@ public class AuthorizationServiceImpl implements UserDetailsService {
         return repository.findByEmail(username);
     }
 }
+*/

@@ -1,5 +1,5 @@
 package com.edburguer.resource;
-
+/*
 import com.edburguer.dto.request.SignInRequest;
 import com.edburguer.dto.request.SignUpRequest;
 import com.edburguer.entity.User;
@@ -45,3 +45,4 @@ public class AuthenticaionResource {
         return ResponseEntity.ok().build();
     }
 }
+*/

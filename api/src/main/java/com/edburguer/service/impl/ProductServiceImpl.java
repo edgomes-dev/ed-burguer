@@ -6,6 +6,7 @@ import com.edburguer.entity.Product;
 import com.edburguer.entity.ProductCategory;
 import com.edburguer.exception.NotFoundException;
 import com.edburguer.mapper.ProductMapper;
+import com.edburguer.repository.ProductCategoryRepository;
 import com.edburguer.repository.ProductRepository;
 import com.edburguer.service.FirebaseService;
 import com.edburguer.service.IngredientService;
@@ -13,6 +14,7 @@ import com.edburguer.service.ProductCategoryService;
 import com.edburguer.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
@@ -23,28 +25,17 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Autowired
-    IngredientService ingredientService;
+    ProductCategoryRepository productCategoryRepository;
 
-    @Autowired
-    ProductCategoryService productCategoryService;
     @Override
-    public Product create(ProductDto productDto) {
-        ProductCategory productCategory = productCategoryService.findById(productDto.getProductCategoryId());
+    @Transactional
+    public Product create(ProductDto dto) {
+        Optional<ProductCategory> productCategory = productCategoryRepository.findById(dto.getProductCategoryId());
+        if(productCategory.isEmpty()) throw new NotFoundException("Categoria de produtos não encontrado");
 
-        if(!productDto.getFile().isEmpty()) {
-            System.out.println("Arquivo existe");
-        }
+        Product entity = ProductMapper.fromDtoToEntity(dto, productCategory.get());
 
-        String fileUrl = "https://pbs.twimg.com/media/FiRRfNfXEAMCwmk.jpg";
-
-        List<Ingredient> ingredients = new ArrayList<>();
-        for(Long ingredientId: productDto.getIngredientsId()) {
-            Ingredient ingredient = ingredientService.findById(ingredientId);
-            ingredients.add(ingredient);
-        }
-
-        return productRepository
-                .save(ProductMapper.fromDtoToEntity(productDto, ingredients, productCategory, fileUrl));
+        return productRepository.save(entity);
     }
 
     @Override
@@ -54,19 +45,28 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findById(Long id) {
-        return productRepository.findById(id).get();
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if(optionalProduct.isEmpty()) throw new NotFoundException("ID inválido");
+
+        return optionalProduct.get();
     }
 
     @Override
-    public Product update(ProductDto productDto) {
-        Optional<Product> entity = productRepository.findById(productDto.getId());
-        if(entity.isEmpty()) throw new NotFoundException("ID não encontrado");
+    @Transactional
+    public Product update(ProductDto dto) {
+        Product entity = this.findById(dto.getId());
 
-        return productRepository.save(entity.get());
+        entity.setName(dto.getName());
+        entity.setPrice(dto.getPrice());
+
+        return productRepository.save(entity);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-        productRepository.deleteById(id);
+        Product entity = this.findById(id);
+
+        productRepository.delete(entity);
     }
 }

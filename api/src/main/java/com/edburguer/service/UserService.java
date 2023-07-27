@@ -3,7 +3,7 @@ package com.edburguer.service;
 import com.edburguer.dto.UserDto;
 import com.edburguer.dto.request.SignUpRequest;
 import com.edburguer.entity.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface UserService {
 
     void delete(Long id);
 
-    void saveAuth(SignUpRequest data);
+    //void saveAuth(SignUpRequest data);
 }

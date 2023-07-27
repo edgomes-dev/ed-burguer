@@ -28,15 +28,15 @@ public class Product {
 
     private Double price;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "tb_ingredients_products",
             joinColumns = @JoinColumn(name = "product_fk", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_fk", referencedColumnName = "id")
     )
-    private List<Ingredient> ingredients;
+    private List<Ingredient> ingredients;*/
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 }

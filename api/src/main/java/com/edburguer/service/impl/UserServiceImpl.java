@@ -10,10 +10,10 @@ import com.edburguer.mapper.UserMapper;
 import com.edburguer.repository.UserRepository;
 import com.edburguer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(entity.getId());
     }
 
-    @Override
+    /*@Override
     public void saveAuth(SignUpRequest data) {
         if(userRepository.findByEmail(data.getEmail()) != null) throw new BadRequestException("Usário com esse e-mail já existe");
 
@@ -75,5 +75,5 @@ public class UserServiceImpl implements UserService {
         newUser.setRole(Role.USER);
 
         userRepository.save(newUser);
-    }
+    }*/
 }
