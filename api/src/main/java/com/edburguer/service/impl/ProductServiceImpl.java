@@ -28,25 +28,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void create() {
-        ProductCategory productCategory = new ProductCategory();
-        productCategory.setName("Teste");
-        productCategory.setImageUrl("/imagem");
+    public Product create(ProductDto dto) {
+        ProductCategory productCategory = productCategoryService.findById(dto.getProductCategoryId());
 
-        Product product = new Product();
-        product.setName("Test");
-        product.setPrice(3.0);
-        product.setImageUrl("/image");
-
-        Product productTwo = new Product();
-        productTwo.setName("New Test");
-        productTwo.setPrice(5.0);
-        productTwo.setImageUrl("/image/two");
-
+        Product product = new Product(null, dto.getName(), dto.getImageUrl(), dto.getPrice(), null);
         productCategory.addProduct(product);
-        productCategory.addProduct(productTwo);
 
         productCategoryRepository.save(productCategory);
+
+        return product;
     }
 
     @Override
