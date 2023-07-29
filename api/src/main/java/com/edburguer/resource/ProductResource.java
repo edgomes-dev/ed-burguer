@@ -19,8 +19,10 @@ public class ProductResource {
     @Autowired
     ProductService productService;
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody ProductDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(dto));
+    public ResponseEntity<Product> create() {
+        productService.create();
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping

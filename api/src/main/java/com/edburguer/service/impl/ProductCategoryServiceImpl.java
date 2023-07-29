@@ -4,7 +4,6 @@ import com.edburguer.dto.ProductCategoryDto;
 import com.edburguer.entity.ProductCategory;
 import com.edburguer.exception.BadRequestException;
 import com.edburguer.exception.NotFoundException;
-import com.edburguer.mapper.ProductCategoryMapper;
 import com.edburguer.repository.ProductCategoryRepository;
 import com.edburguer.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +21,15 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     @Transactional
-    public ProductCategory create(ProductCategoryDto productCategoryDto) {
-        if(Objects.nonNull(productCategoryDto.getId())) throw new BadRequestException("ID precisa ser nulo");
-        ProductCategory productCategory = ProductCategoryMapper.fromDtoToEntity(productCategoryDto);
+    public ProductCategory create(ProductCategoryDto dto) {
+        if(Objects.nonNull(dto.getId())) throw new BadRequestException("ID precisa ser nulo");
+        ProductCategory productCategory = new ProductCategory(dto.getName(), dto.getImageUrl());
 
         return productCategoryRepository.save(productCategory);
     }
 
     @Override
+    @Transactional
     public List<ProductCategory> findAll() {
         return productCategoryRepository.findAll();
     }

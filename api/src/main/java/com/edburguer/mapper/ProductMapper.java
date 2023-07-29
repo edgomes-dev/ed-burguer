@@ -1,5 +1,5 @@
 package com.edburguer.mapper;
-
+/*
 import com.edburguer.dto.ProductDto;
 import com.edburguer.entity.Ingredient;
 import com.edburguer.entity.Product;
@@ -11,12 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 public class ProductMapper {
-    public static Product fromDtoToEntity(ProductDto dto, ProductCategory  productCategory) {
-        return Product.builder()
-                .name(dto.getName())
+    public static Product fromDtoToEntity(ProductDto dto) {
+        return Product
+                .getName(dto.getName())
                 .imageUrl("")
                 .price(dto.getPrice())
-                .productCategory(productCategory)
                 .build();
     }
-}
+}*/
