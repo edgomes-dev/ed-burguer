@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "products")
 @Builder
 @Entity
 @Table(name = "tb_ingredient")
@@ -20,9 +19,9 @@ public class Ingredient {
 
     private String name;
 
+    private String description;
+
     private Double price;
 
-    /*@ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Product> products;*/
+    private Integer stock;
 }
