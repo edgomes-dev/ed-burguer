@@ -23,6 +23,8 @@ public class ProductDto {
 
     private Double price;
 
+    private String description;
+
     private List<Long> ingredients;
 
     private Long productCategoryId;

@@ -28,6 +28,8 @@ public class Product implements Serializable {
 
     private Double price;
 
+    private String description;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tb_products_ingredients",

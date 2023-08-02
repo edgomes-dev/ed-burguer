@@ -2,6 +2,7 @@ package com.edburguer.service;
 
 import com.edburguer.dto.ProductCategoryDto;
 import com.edburguer.entity.ProductCategory;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

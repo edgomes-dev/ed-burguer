@@ -14,5 +14,11 @@ public class IngredientDto {
 
     private String name;
 
+    private String description;
+
     private Double price;
+
+    private Integer stock;
+
+    private Integer repetitions;
 }

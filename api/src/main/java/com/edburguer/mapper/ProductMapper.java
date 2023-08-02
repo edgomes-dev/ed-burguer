@@ -9,6 +9,7 @@ public class ProductMapper {
                 .name(dto.getName())
                 .imageUrl(dto.getImageUrl())
                 .price(dto.getPrice())
+                .description(dto.getDescription())
                 .build();
     }
 }

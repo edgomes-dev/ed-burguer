@@ -7,10 +7,13 @@ import com.edburguer.exception.NotFoundException;
 import com.edburguer.mapper.ProductCategoryMapper;
 import com.edburguer.repository.ProductCategoryRepository;
 import com.edburguer.service.ProductCategoryService;
+import com.edburguer.utils.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,7 +27,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Transactional
     public ProductCategory create(ProductCategoryDto dto) {
         if(Objects.nonNull(dto.getId())) throw new BadRequestException("ID precisa ser nulo");
-        ProductCategory productCategory = ProductCategoryMapper.fromDtoToEntity(dto);
+        String filePath = UploadImage.upload(dto.getFile());
+
+        ProductCategory productCategory = ProductCategoryMapper.fromDtoToEntity(dto, filePath);
 
         return productCategoryRepository.save(productCategory);
     }

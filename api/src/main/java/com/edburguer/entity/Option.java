@@ -30,6 +30,9 @@ public class Option {
 
     private Boolean repetitious;
 
+    @Column(name = "options_required")
+    private String optionsRequired;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tb_options_ingredients",

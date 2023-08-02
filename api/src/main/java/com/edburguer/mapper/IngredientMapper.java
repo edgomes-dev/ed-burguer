@@ -7,7 +7,10 @@ public class IngredientMapper {
     public static Ingredient fromDtoToEntity(IngredientDto dto) {
         return Ingredient.builder()
                 .name(dto.getName())
+                .description(dto.getDescription())
                 .price(dto.getPrice())
+                .stock(dto.getStock())
+                .repetitions(dto.getRepetitions())
                 .build();
     }
 }
