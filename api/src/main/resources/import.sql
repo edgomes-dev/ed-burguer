@@ -11,7 +11,7 @@ INSERT INTO tb_address (name, street, number, complement, district_id, user_id) 
 INSERT INTO tb_address (name, street, number, complement, district_id, user_id) VALUES ('Casa', 'Rua Edson Nieling Lundgren', '10', 'Próximo da Panificadora Praia da Conceição', 3, 3);
 
 
-INSERT INTO tb_product_category (name) VALUES ('Cachorro Quente');
+INSERT INTO tb_product_category (name, image_url) VALUES ('Cachorro Quente', '02-08-2023-22-08-16hot-dog-svgrepo.svg');
 
 INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Pão HotDog', null, null, 50, null);
 INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Salsicha', null, 2.50, 50, null);
@@ -31,9 +31,9 @@ INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES 
 INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Uva Passa', null, 2.50, 50, null);
 INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Cheddar', null, 4, 50, null);
 
-INSERT INTO tb_product (name, description, image_url, price, product_category_id) VALUES ('Cachorro quente simples', 'Pão, salsicha, mussarela, milho, ervilha, batata palha, vinagrete', null, 5.99, 1);
-INSERT INTO tb_product (name, description, image_url, price, product_category_id) VALUES ('Amoroso', 'Pão, purê, salsicha, maionese, catchup, mostarda, batata palha, vinagrete', null, 16, 1);
-INSERT INTO tb_product (name, description, image_url, price, product_category_id) VALUES ('Caprichoso', 'Pão, Salsicha, Purê de batata, Vinagrete, Milho, Ervilha, Frango desfiado, Bacon, Catupiry, Maionese, Ketchup, Mostarda e batata palha', null, 29, 1);
+INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Cachorro quente simples', '02-08-2023-22-03-18hotdog-simples-min.jpg', 'Pão, salsicha, mussarela, milho, ervilha, batata palha, vinagrete', 5.99, 1);
+INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Amoroso', '02-08-2023-22-06-44hotdog-amoroso-min.jpg', 'Pão, purê, salsicha, maionese, catchup, mostarda, batata palha, vinagrete', 16, 1);
+INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Caprichoso', '02-08-2023-22-06-10hotdog-caprichoso-min.jpg', 'Pão, Salsicha, Purê de batata, Vinagrete, Milho, Ervilha, Frango desfiado, Bacon, Catupiry, Maionese, Ketchup, Mostarda e batata palha', 29, 1);
 
 INSERT INTO tb_products_ingredients (product_id, ingredient_id) VALUES (1, 1);
 INSERT INTO tb_products_ingredients (product_id, ingredient_id) VALUES (1, 2);
