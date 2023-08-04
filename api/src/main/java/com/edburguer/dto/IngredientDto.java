@@ -18,7 +18,5 @@ public class IngredientDto {
 
     private Double price;
 
-    private Integer stock;
-
     private Integer repetitions;
 }

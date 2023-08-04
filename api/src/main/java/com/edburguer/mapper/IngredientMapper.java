@@ -9,7 +9,6 @@ public class IngredientMapper {
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .price(dto.getPrice())
-                .stock(dto.getStock())
                 .repetitions(dto.getRepetitions())
                 .build();
     }

@@ -13,23 +13,23 @@ INSERT INTO tb_address (name, street, number, complement, district_id, user_id) 
 
 INSERT INTO tb_product_category (name, image_url) VALUES ('Cachorro Quente', '02-08-2023-22-08-16hot-dog-svgrepo.svg');
 
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Pão HotDog', null, null, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Salsicha', null, 2.50, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Mussarela', null, 2, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Milho e Ervilha', null, null, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Vinagrete', null, 2.50, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Batata palha', null, null, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Purê de Batata', null, 3, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Maionese', null, null, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Catchup', null, null, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Mostarda', null, null, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Frango', 'Desfiado', 5, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Bacon', null, 6, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Catupiry', null, 4, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Ovo', 'Frito', 2.50, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Ovo de Codorna', null, 4, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Uva Passa', null, 2.50, 50, null);
-INSERT INTO tb_ingredient (name, description, price, stock, repetitions) VALUES ('Cheddar', null, 4, 50, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Pão HotDog', null, null, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Salsicha', null, 2.50, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Mussarela', null, 2, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Milho e Ervilha', null, null, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Vinagrete', null, 2.50, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Batata palha', null, null, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Purê de Batata', null, 3, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Maionese', null, null, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Catchup', null, null, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Mostarda', null, null, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Frango', 'Desfiado', 5, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Bacon', null, 6, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Catupiry', null, 4, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Ovo', 'Frito', 2.50, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Ovo de Codorna', null, 4, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Uva Passa', null, 2.50, null);
+INSERT INTO tb_ingredient (name, description, price, repetitions) VALUES ('Cheddar', null, 4, null);
 
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Cachorro quente simples', '02-08-2023-22-03-18hotdog-simples-min.jpg', 'Pão, salsicha, mussarela, milho, ervilha, batata palha, vinagrete', 5.99, 1);
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Amoroso', '02-08-2023-22-06-44hotdog-amoroso-min.jpg', 'Pão, purê, salsicha, maionese, catchup, mostarda, batata palha, vinagrete', 16, 1);
