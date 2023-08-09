@@ -46,6 +46,9 @@ INSERT INTO tb_product (name, image_url, description, price, product_category_id
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Hambúrguer Simples', '04-08-2023-17-26-51hamburguer-simples.jpg', 'Pão, hambúrguer de carne, presunto, mussarela, maionese caseira, alface e tomate.', 10, 2);
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Hambúrguer Amoroso', '04-08-2023-17-27-10hamburguer-amoroso.jpg', 'Pão, alface, tomate, hambúrguer de carne, bacon, presunto, mussarela e maionese caseira.', 18, 2);
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Hambúrguer Caprichoso', '04-08-2023-17-27-37hamburguer-caprichoso.jpg', 'Pão, hambúrguer de carne, alface, tomate, filé de frango, presunto, mussarela e maionese caseira.', 25, 2);
+INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Açai Simples', '04-08-2023-17-27-52acai-simples.jpg', '', 7, 3);
+INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Açai Amoroso', '04-08-2023-17-28-09acai-amoroso.jpg', '', 15, 3);
+INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Açai Caprichoso', '04-08-2023-17-28-24acai-caprichoso.jpg', '', 23, 3);
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Coca Cola (2 Litros)', '04-08-2023-17-30-03coca-cola-2L.jpeg', '', 15, 4);
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Coca Cola (350ml)', '04-08-2023-17-30-30coca-cola-350ml.jpeg', 'COCA COLA LATA', 6, 4);
 INSERT INTO tb_product (name, image_url, description, price, product_category_id) VALUES ('Coca Cola (600ml)', '04-08-2023-17-30-50coca-cola-600ml.jpeg', '', 8, 4);

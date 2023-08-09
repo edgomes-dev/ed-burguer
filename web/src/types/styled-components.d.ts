@@ -21,7 +21,10 @@ declare module 'styled-components' {
       };
     };
     colors: {
-      orange: string;
+      orange: {
+        main: string;
+        dark: string;
+      };
       red: string;
       white: string;
       mainBackground: string;

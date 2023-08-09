@@ -2,22 +2,14 @@ import { ListContainer } from '@/components/ListContainer';
 import { Menu } from '@/components/Menu';
 
 import * as S from './styles';
-import { useEffect, useState } from 'react';
-import { categoryItemType, categoryMock, itemsMock } from './mock';
-import { ItemProps } from '@/components/ListContainer';
-import Image from 'next/image';
+import { IProductCategory } from '@/pages';
 import { Slider } from '@/components/Slider';
-type CardaioTemplateProps = {
-  slug: string;
+
+type HomeTemplatePropsType = {
+  data: IProductCategory[];
 };
 
-export function HomeTemplate({ slug }: CardaioTemplateProps) {
-  const [data, SetData] = useState<ItemProps[]>([]);
-
-  useEffect(() => {
-    SetData(itemsMock);
-  }, [data]);
-
+export function HomeTemplate({ data }: HomeTemplatePropsType) {
   const settings = {
     dots: true,
     infinite: false,
@@ -25,6 +17,8 @@ export function HomeTemplate({ slug }: CardaioTemplateProps) {
     slidesToShow: 3,
     slidesToScroll: 3
   };
+
+  console.log(data);
 
   return (
     <>
@@ -38,15 +32,17 @@ export function HomeTemplate({ slug }: CardaioTemplateProps) {
           </div>
         </S.Search>
         <S.Category>
-          <Slider />
+          <Slider data={data} />
         </S.Category>
-        <p>{slug}</p>
-        <ListContainer
-          title="hamburgueres"
-          type="description"
-          items={data}
-          icon={true}
-        />
+        {data.map((category) => (
+          <ListContainer
+            key={category.id}
+            id={category.id}
+            imageUrl={category.imageUrl}
+            name={category.name}
+            products={category.products}
+          />
+        ))}
       </S.Wrapper>
     </>
   );

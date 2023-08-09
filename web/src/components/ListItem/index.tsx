@@ -1,28 +1,35 @@
 import Image from 'next/image';
 import * as S from './styles';
+import { IProduct } from '@/pages';
+
+import { GrFormAdd as AddIcon } from 'react-icons/gr';
 
 export type ListItemProps = {
-  text: string;
-  img: string;
-  link?: string;
-  price: number;
-  description: string;
+  data: IProduct;
 };
 
-export function ListItem({ text, img, price, description }: ListItemProps) {
+export function ListItem({ data }: ListItemProps) {
   return (
     <S.Wrapper>
-      <Image width={100} height={100} src={img} alt={text} />
+      <Image
+        src={'/img/' + data.imageUrl}
+        alt={data.name}
+        width={150}
+        height={150}
+      />
       <S.Content>
-        <h3>{text}</h3>
-        {!!description && <p>{description}</p>}
+        <h3>{data.name}</h3>
+        {!!data.description && <p>{data.description}</p>}
         <span>
-          {price.toLocaleString('pt-BR', {
+          {data.price.toLocaleString('pt-BR', {
             style: 'currency',
             currency: 'BRL'
           })}
         </span>
       </S.Content>
+      <S.Button>
+        <AddIcon />
+      </S.Button>
     </S.Wrapper>
   );
 }

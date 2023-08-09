@@ -4,13 +4,13 @@ export const Wrapper = styled.span`
   ${({ theme }) => css`
     display: flex;
     background-color: ${theme.colors.gray.dark};
-    padding: 15px;
-    margin: 50px 0;
+    padding: 10px;
     gap: 2rem;
+    position: relative;
+    cursor: pointer;
 
     img {
       border-radius: 20px;
-      opacity: 0.8;
     }
   `}
 `;
@@ -19,11 +19,29 @@ export const Content = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     color: ${theme.colors.title};
 
     span {
       font-weight: bolder;
+    }
+  `}
+`;
+
+export const Button = styled.div`
+  ${({ theme }) => css`
+    width: 50px;
+    height: 35px;
+    background-color: ${theme.colors.orange.main};
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ${theme.transition.default};
+
+    &:hover {
+      background-color: ${theme.colors.orange.dark};
     }
   `}
 `;

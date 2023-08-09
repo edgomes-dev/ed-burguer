@@ -1,45 +1,31 @@
-import Link from 'next/link';
 import * as S from './styles';
 import { ListItem } from '../ListItem';
-import { FaHamburger as IconHamburger } from 'react-icons/fa';
+import { IProductCategory } from '@/pages';
+import Image from 'next/image';
 
-export type ItemProps = {
-  text: string;
-  img: string;
-  link?: string;
-  price?: number;
-  description?: string;
-};
-
-export type ListContainerProps = {
-  title: string;
-  type: 'slogan' | 'description';
-  items: ItemProps[];
-  icon?: boolean;
-};
+import { IoIosArrowDown as ArrowIcon } from 'react-icons/io';
+import { useState } from 'react';
 
 export function ListContainer({
-  title,
-  type,
-  items,
-  icon
-}: ListContainerProps) {
+  id,
+  name,
+  imageUrl,
+  products
+}: IProductCategory) {
+  const [vissible, setVissible] = useState(true);
+
   return (
-    <S.Wrapper>
-      <h2>
-        {!!icon && <IconHamburger />}
-        {title}
-      </h2>
-      <S.Container>
-        {items.map(({ text, img, link, price, description }: ItemProps) => (
-          <Link key={link} href={link!}>
-            <ListItem
-              text={text}
-              img={img}
-              price={price!}
-              description={description!}
-            />
-          </Link>
+    <S.Wrapper key={id}>
+      <S.Menu>
+        <div>
+          <Image src={'/img/' + imageUrl} alt={name} width={35} height={35} />
+          <h2>{name}</h2>
+        </div>
+        <ArrowIcon onClick={(e) => setVissible(!vissible)} />
+      </S.Menu>
+      <S.Container visible={vissible}>
+        {products.map((product) => (
+          <ListItem key={product.id} data={product} />
         ))}
       </S.Container>
     </S.Wrapper>

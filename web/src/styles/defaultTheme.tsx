@@ -21,7 +21,10 @@ export const defualtTheme: DefaultTheme = {
     }
   },
   colors: {
-    orange: '#DB790F',
+    orange: {
+      main: '#DB790F',
+      dark: '#C97720'
+    },
     red: '#970918',
     white: '#F5F4E3',
     mainBackground: '#F5EBDC',
