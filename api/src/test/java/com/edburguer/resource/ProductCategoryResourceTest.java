@@ -38,7 +38,7 @@ public class ProductCategoryResourceTest {
     @Test
     @DisplayName("Create Product Category")
     public void testPostCreateProductCategory() throws Exception {
-        ProductCategoryDto productCategoryDto = new ProductCategoryDto(null, "Salgados", "/salgados");
+        ProductCategoryDto productCategoryDto = new ProductCategoryDto(null, "Salgados");
         ProductCategory productCategoryExpected = new ProductCategory(1L, "Salgados", "/salgados");
         Mockito.doReturn(productCategoryExpected).when(service).create(productCategoryDto);
 
@@ -97,7 +97,7 @@ public class ProductCategoryResourceTest {
     @Test
     @DisplayName("Update Sucess")
     public void testPutSucessProductCategory() throws Exception {
-        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Salgados", "/salgados");
+        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Salgados");
         ProductCategory productCategoryExpected = new ProductCategory(1L, "Salgados", "/salgados");
         ProductCategory productCategoryExists = new ProductCategory(1L, "Salgado", "/salgado");
         Mockito.doReturn(productCategoryExists).when(service).findById(1L);
@@ -115,7 +115,7 @@ public class ProductCategoryResourceTest {
     @Test
     @DisplayName("Updated Failure")
     public void testPutFailureProductCategory_when_idNotExists() throws Exception {
-        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Salgados", "/salgados");
+        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Salgados");
         Mockito.doThrow(NotFoundException.class).when(service).update(productCategoryDto);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/product-category")

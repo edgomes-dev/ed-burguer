@@ -1,41 +1,29 @@
+import { IngredientType, OptionType } from '@/pages';
 import { IngredientsItem, IngredientsItemType } from '../IngredientsItem';
 import * as S from './styles';
 
-export type IngredientsListProps = {
-  title: string;
-  options: number;
-  items: IngredientsItemType[];
-  changeValue: (add: number, sub: number) => void;
-  complement: boolean;
-  handleComplementOrAdditional: (
-    isComplement: boolean,
-    item: string,
-    isDelete: boolean
-  ) => void;
+type IngredientsListProps = {
+  option: OptionType;
+  //changeValue: (add: number, sub: number) => void;
 };
 
-export function IngredientsList({
-  title,
-  options,
-  items,
-  changeValue,
-  complement,
-  handleComplementOrAdditional
-}: IngredientsListProps) {
+export function IngredientsList({ option }: IngredientsListProps) {
   return (
     <S.Wrapper>
-      <S.Title complement={complement}>
+      <S.Title complement={option.required}>
         <h4>
-          {title} (até {options} ite{options > 1 ? 'ns' : 'm'})
+          {option.name}{' '}
+          <span>
+            (até {option.maximumAmount} ite
+            {option.maximumAmount > 1 ? 'ns' : 'm'})
+          </span>
         </h4>
-        <p>{complement ? 'OBRIGATORIO' : 'OPCIONAL'}</p>
+        <p>{option.required ? 'OBRIGATORIO' : 'OPCIONAL'}</p>
       </S.Title>
+      {option.required && <p>{option.optionsRequired}</p>}
       <IngredientsItem
-        options={options}
-        items={items}
-        changeValue={changeValue}
-        complement={complement}
-        handleComplementOrAdditional={handleComplementOrAdditional}
+        options={option.maximumAmount}
+        items={option.ingredients}
       />
     </S.Wrapper>
   );

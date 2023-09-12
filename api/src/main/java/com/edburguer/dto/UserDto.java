@@ -5,19 +5,20 @@ import lombok.Data;
 
 import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class UserDto {
     private Long id;
 
-    @NotBlank
     private String name;
 
-    @Email
     private String email;
 
-    @NotBlank
+    private String phone;
+
     private String password;
 
     private Role role;

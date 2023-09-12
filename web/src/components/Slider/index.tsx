@@ -1,9 +1,4 @@
 import * as S from './styles';
-import {
-  AiOutlineArrowLeft as IconLeft,
-  AiOutlineArrowRight as IconRight
-} from 'react-icons/ai';
-import { MouseEvent, useRef } from 'react';
 import Image from 'next/image';
 import { IProductCategory } from '@/pages';
 

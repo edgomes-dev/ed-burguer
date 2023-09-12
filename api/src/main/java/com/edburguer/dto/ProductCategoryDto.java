@@ -20,5 +20,8 @@ public class ProductCategoryDto {
 
     private MultipartFile file;
 
-    private String test;
+    public ProductCategoryDto(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

@@ -1,9 +1,9 @@
 package com.edburguer.resource;
 
-import com.edburguer.dto.AddressDtoRequest;
-import com.edburguer.dto.AddressDtoResponse;
+import com.edburguer.dto.AddressDto;
 import com.edburguer.entity.Address;
 import com.edburguer.entity.District;
+import com.edburguer.entity.Role;
 import com.edburguer.entity.User;
 import com.edburguer.exception.NotFoundException;
 import com.edburguer.service.AddressService;
@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -40,14 +38,15 @@ public class AddressResourceTest {
     @Test
     @DisplayName("Criar com sucesso um Address")
     public void testPostCreateAddress() throws Exception {
-        AddressDtoRequest addressDtoRequest = new AddressDtoRequest(null, "Trabalho", "Rua da Moeda", "18A", "Perto do posto de combustivel", 1L, 1L);
+        AddressDto addressDto = new AddressDto(null, "Trabalho", "Rua da Moeda", "18A", "Perto do posto de combustivel", 1L);
         District district = new District(1L, "Boa Viagem", 10.00);
-        User user = new User(1L, "Ed Gomes", "ed@gmail.com", "senha123", false);
-        AddressDtoResponse addressExpected = new AddressDtoResponse(1L, "Trabalho", "Rua da Moeda", "18A", "Perto do posto de combustivel", district, user);
-        Mockito.doReturn(addressExpected).when(addressService).create(addressDtoRequest);
+        Address addressExpected = new Address(1L, "Trabalho", "Rua da Moeda", "18A", "Perto do posto de combustivel", district);
+        User user = new User(1L, "Ed Gomes", "ed@gmail.com", "81981112222", "senha123", Role.USER, Arrays.asList(addressExpected));
+
+        Mockito.doReturn(addressExpected).when(addressService).create(addressDto);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/address")
-                .content(asJsonString(addressDtoRequest))
+                .content(asJsonString(addressDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andDo(print())
@@ -60,9 +59,10 @@ public class AddressResourceTest {
     @DisplayName("Retornar todos os Address com sucesso")
     public void testGetFindAllSucess() throws Exception {
         District district = new District(1L, "Pau Amarelo", 3.0);
-        User user = new User(1L, "Ed", "ed@gmail.com", "senha123", true);
-        Address address = new Address(1L, "Casa", "Rua Paulo de Souza", "18A", "casa 10", district, user);
-        Address address2 = new Address(2L, "Trabalho", "Rua Abigail Primeiro", "17", "", district, user);
+        Address address = new Address(1L, "Casa", "Rua Paulo de Souza", "18A", "casa 10", district);
+        Address address2 = new Address(2L, "Trabalho", "Rua Abigail Primeiro", "17", "", district);
+        User user = new User(1L, "Ed Gomes", "ed@gmail.com", "81981112222", "senha123", Role.USER, Arrays.asList(address, address2));
+
         Mockito.doReturn(Arrays.asList(address, address2)).when(addressService).findAll();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/address"))
@@ -80,8 +80,8 @@ public class AddressResourceTest {
     @DisplayName("Retornar um address com sucesso quando o ID for correto")
     public void testGetFindByIdSucess() throws Exception {
         District district = new District(1L, "Pau Amarelo", 3.0);
-        User user = new User(1L, "Ed", "ed@gmail.com", "senha123", true);
-        AddressDtoResponse address = new AddressDtoResponse(1L, "Casa", "Rua Paulo de Souza", "18A", "casa 10", district, user);
+        Address address = new Address(1L, "Casa", "Rua Paulo de Souza", "18A", "casa 10", district);
+        User user = new User(1L, "Ed Gomes", "ed@gmail.com", "81981112222", "senha123", Role.USER, Arrays.asList(address));
         Mockito.doReturn(address).when(addressService).findById(1L);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/address/1"))
@@ -104,22 +104,20 @@ public class AddressResourceTest {
     @Test
     @DisplayName("Atualizar com sucesso um address")
     public void testPutAddress() throws Exception {
-        AddressDtoRequest addressDtoRequest = new AddressDtoRequest(1L, "Casa da namorada", "Rua da Moeda", "18B", "Perto do posto de combustivel", 2L, 1L);
+        AddressDto addressDto = new AddressDto(1L, "Trabalho", "Rua da Moeda", "18A", "Perto do posto de combustivel", 1L);
 
         District districtExists = new District(1L, "Vasco da Gama", 3.0);
-        User userExists = new User(1L, "Ed", "ed@gmail.com", "senha123", false);
-        Address addressExists = new Address(1L, "Casa", "Rua da Moeda", "18A", "casa 10", districtExists, userExists);
-        AddressDtoResponse addressDtoResponseExists = new AddressDtoResponse(1L, "Casa da namorada", "Rua da Moeda", "18B", "Perto do posto de combustivel", districtExists, userExists);
+        Address addressExists = new Address(1L, "Casa da namorada", "Rua da Moeda", "18B", "Perto do posto de combustivel", districtExists);
+        User user = new User(1L, "Ed Gomes", "ed@gmail.com", "81981112222", "senha123", Role.USER, Arrays.asList(addressExists));
 
         District districtExpected = new District(2L, "Casa Amarela", 5.0);
-        Address addressExpected = new Address(1L, "Casa da namorada", "Rua da Moeda", "18B", "Perto do posto de combustivel", districtExpected, userExists);
-        AddressDtoResponse addressDtoResponseExpected = new AddressDtoResponse(1L, "Casa da namorada", "Rua da Moeda", "18B", "Perto do posto de combustivel", districtExpected, userExists);
+        Address addressExpected = new Address(1L, "Casa da namorada", "Rua da Moeda", "18B", "Perto do posto de combustivel", districtExpected);
 
-        Mockito.doReturn(addressDtoResponseExists).when(addressService).findById(1L);
-        Mockito.doReturn(addressDtoResponseExpected).when(addressService).update(addressDtoRequest);
+        Mockito.doReturn(addressExists).when(addressService).findById(1L);
+        Mockito.doReturn(addressExpected).when(addressService).update(addressDto);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/address")
-                .content(asJsonString(addressDtoRequest))
+                .content(asJsonString(addressDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -131,12 +129,12 @@ public class AddressResourceTest {
     @Test
     @DisplayName("NotFoundExeception ao tentar atualizar com id inválido")
     public void testPutAddressFailure_when_idNotExists() throws Exception {
-        AddressDtoRequest addressDtoRequest = new AddressDtoRequest(1L, "Casa da namorada", "Rua da Moeda", "18B", "Perto do posto de combustivel", 2L, 1L);
+        AddressDto addressDto = new AddressDto(1L, "Trabalho", "Rua da Moeda", "18A", "Perto do posto de combustivel", 1L);
 
-        Mockito.doThrow(NotFoundException.class).when(addressService).update(addressDtoRequest);
+        Mockito.doThrow(NotFoundException.class).when(addressService).update(addressDto);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/address")
-                        .content(asJsonString(addressDtoRequest))
+                        .content(asJsonString(addressDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }

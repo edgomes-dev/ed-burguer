@@ -1,11 +1,13 @@
 package com.edburguer.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,25 +23,30 @@ public class Option {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String name;
 
     @Column(name = "maximum_amount")
+    @NotNull
     private Integer maximumAmount;
 
     private Boolean required;
 
-    private Boolean repetitious;
-
     @Column(name = "options_required")
     private String optionsRequired;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable(
             name = "tb_options_ingredients",
             joinColumns = @JoinColumn(name = "option_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
     )
     private List<Ingredient> ingredients = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "product_category_id")
+    @JsonBackReference
+    private ProductCategory category;
 
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);

@@ -1,34 +1,36 @@
 import { css, styled } from 'styled-components';
 
 export const Wrapper = styled.label`
-  cursor: pointer;
-
   input {
     display: none;
-  }
-
-  input:checked + div {
-    background-color: red;
-
-    div {
-      span {
-        visibility: visible;
-      }
-    }
   }
 `;
 
 export const Content = styled.div`
-  display: flex;
-  justify-content: space-between;
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid ${theme.colors.gray.medium};
+
+    p {
+      font-size: 12pt;
+    }
+  `}
 `;
 
 export const Price = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
 
-  span {
-    visibility: hidden;
-  }
+    .item {
+      font-size: 10pt;
+      background-color: ${theme.colors.orange.main};
+      padding: 3px;
+      border-radius: 2px;
+    }
+  `}
 `;

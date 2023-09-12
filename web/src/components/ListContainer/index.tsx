@@ -1,6 +1,6 @@
 import * as S from './styles';
 import { ListItem } from '../ListItem';
-import { IProductCategory } from '@/pages';
+import { ProductCategoryType } from '@/pages';
 import Image from 'next/image';
 
 import { IoIosArrowDown as ArrowIcon } from 'react-icons/io';
@@ -10,8 +10,9 @@ export function ListContainer({
   id,
   name,
   imageUrl,
+  options,
   products
-}: IProductCategory) {
+}: ProductCategoryType) {
   const [vissible, setVissible] = useState(true);
 
   return (
@@ -25,7 +26,12 @@ export function ListContainer({
       </S.Menu>
       <S.Container visible={vissible}>
         {products.map((product) => (
-          <ListItem key={product.id} data={product} />
+          <ListItem
+            key={product.id}
+            category={name}
+            product={product}
+            options={options}
+          />
         ))}
       </S.Container>
     </S.Wrapper>

@@ -110,7 +110,7 @@ public class IngredientServiceTest {
     @DisplayName("PUT atualizar o ingredient com sucesso quando o id for válido")
     public void should_updateIngredientsSucess_when_idExists() {
         // arrange
-        IngredientDto ingredientDto = new IngredientDto(1L, "Milho verde", 3.0);
+        IngredientDto ingredientDto = new IngredientDto(1L, "Milho verde", "", 3.0, 1);
 
         Ingredient ingredientExists = new Ingredient();
         ingredientExists.setId(1L);
@@ -136,7 +136,7 @@ public class IngredientServiceTest {
     @DisplayName("PUT error ao tentar atualizar um ingredient com ID inválido")
     public void should_updateIngredientsFailure_when_idNotExists() {
         // arrange
-        IngredientDto ingredientDto = new IngredientDto(1L, "Milho verde", 3.0);
+        IngredientDto ingredientDto = new IngredientDto(1L, "Milho verde", "", 3.0, 1);
         Mockito.doThrow(NotFoundException.class).when(ingredientRepository).findById(1L);
 
         // action

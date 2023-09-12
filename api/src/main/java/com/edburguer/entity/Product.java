@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,14 +22,18 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String name;
 
     @Column(name = "image_url")
+    @NotNull
     private String imageUrl;
 
-    private Double price;
-
+    @NotNull
     private String description;
+
+    @NotNull
+    private Double price;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -41,7 +46,7 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product_category_id")
     @JsonBackReference
-    private ProductCategory category;
+    private ProductCategory productCategory;
 
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);

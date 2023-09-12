@@ -1,18 +1,18 @@
 package com.edburguer.service;
 
-import com.edburguer.dto.AddressDtoRequest;
-import com.edburguer.dto.AddressDtoResponse;
+import com.edburguer.dto.AddressDto;
+import com.edburguer.entity.Address;
 
 import java.util.List;
 
 public interface AddressService {
-    AddressDtoResponse create(AddressDtoRequest dto);
+    Address create(AddressDto dto);
 
-    List<AddressDtoResponse> findAll();
+    List<Address> findAll();
 
-    AddressDtoResponse findById(Long id);
+    Address findById(Long id);
 
-    AddressDtoResponse update(AddressDtoRequest dto);
+    Address update(AddressDto dto);
 
     void delete(Long id);
 }

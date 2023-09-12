@@ -7,6 +7,7 @@ export const Wrapper = styled.nav`
 
     a {
       text-decoration: none;
+      color: white;
     }
 
     ul {
@@ -22,6 +23,14 @@ export const Wrapper = styled.nav`
       }
     }
   `}
+`;
+
+export const LeftArea = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18pt;
+  color: white;
 `;
 
 export const RightArea = styled.div`

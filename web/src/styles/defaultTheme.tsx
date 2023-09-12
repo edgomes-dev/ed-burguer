@@ -34,11 +34,13 @@ export const defualtTheme: DefaultTheme = {
     title: '#D62300',
     black: '#161618',
     gray: {
-      light: '#404042',
       background: '#1D1E20',
-      dark: '#222325'
+      dark: '#222325',
+      medium: '#404042',
+      light: '#A8A89F'
     }
   },
+
   spacings: {
     xxsmall: '0.8rem',
     xsmall: '1.6rem',

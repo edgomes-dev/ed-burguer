@@ -32,7 +32,6 @@ public class ProductServiceImpl implements ProductService {
     IngredientService ingredientService;
 
     @Override
-    @Transactional
     public Product create(ProductDto dto) {
         ProductCategory productCategory = productCategoryService.findById(dto.getProductCategoryId());
 
@@ -46,15 +45,17 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(dto.getPrice());
         product.setDescription(dto.getDescription());
         product.addIngredient(ingredientList);
-        productCategory.addProduct(product);
+
+        Product entity = productRepository.save(product);
+
+        productCategory.addProduct(entity);
 
         productCategoryRepository.save(productCategory);
 
-        return product;
+        return entity;
     }
 
     @Override
-    @Transactional
     public List<Product> findAll() {
         return productRepository.findAll();
     }
@@ -68,7 +69,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
     public Product update(ProductDto dto) {
         Product entity = this.findById(dto.getId());
 
@@ -79,7 +79,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
         Product entity = this.findById(id);
 

@@ -7,8 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import java.util.*;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,22 +21,32 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String name;
 
     @Column(name = "image_url")
+    @NotNull
     private String imageUrl;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category")
+    @JsonManagedReference
+    private List<Option> options = new ArrayList<>();
+
+    @OneToMany(mappedBy = "productCategory")
     @JsonManagedReference
     private List<Product> products = new ArrayList<>();
 
-    public void addProduct(Product product) {
-        products.add(product);
-        product.setCategory(this);
+    public void addOption(Option option) {
+        this.options.add(option);
     }
 
-    public void removeProduct(Product product) {
-        products.remove(product);
-        product.setCategory(null);
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public ProductCategory(Long id, String name, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.imageUrl = imageUrl;
     }
 }

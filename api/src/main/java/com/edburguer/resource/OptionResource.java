@@ -1,8 +1,8 @@
 package com.edburguer.resource;
 
-import com.edburguer.dto.UserDto;
-import com.edburguer.entity.User;
-import com.edburguer.service.UserService;
+import com.edburguer.dto.OptionDto;
+import com.edburguer.entity.Option;
+import com.edburguer.service.OptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,28 +10,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController()
-@RequestMapping("/user")
-public class UserResource {
+@RestController
+@RequestMapping("/option")
+public class OptionResource {
     @Autowired
-    private UserService service;
+    private OptionService service;
+
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody UserDto dto) {
+    public ResponseEntity<Option> create(@RequestBody OptionDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<Option>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
+    public ResponseEntity<Option> findById(@PathVariable("id") Long id) {
+        return  ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
     }
 
     @PutMapping
-    public ResponseEntity<User> update(@RequestBody UserDto dto) {
+    public ResponseEntity<Option> update(@RequestBody OptionDto dto) {
         return ResponseEntity.status(HttpStatus.OK).body(service.update(dto));
     }
 

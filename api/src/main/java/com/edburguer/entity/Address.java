@@ -3,6 +3,8 @@ package com.edburguer.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
@@ -15,19 +17,18 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String street;
 
+    @NotBlank
     private String number;
 
     private String complement;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "district_id")
     private District district;
-
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private User user;
 }

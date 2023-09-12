@@ -2,11 +2,11 @@ import { ListContainer } from '@/components/ListContainer';
 import { Menu } from '@/components/Menu';
 
 import * as S from './styles';
-import { IProductCategory } from '@/pages';
+import { ProductCategoryType } from '@/pages';
 import { Slider } from '@/components/Slider';
 
 type HomeTemplatePropsType = {
-  data: IProductCategory[];
+  data: ProductCategoryType[];
 };
 
 export function HomeTemplate({ data }: HomeTemplatePropsType) {
@@ -40,6 +40,7 @@ export function HomeTemplate({ data }: HomeTemplatePropsType) {
             id={category.id}
             imageUrl={category.imageUrl}
             name={category.name}
+            options={category.options}
             products={category.products}
           />
         ))}

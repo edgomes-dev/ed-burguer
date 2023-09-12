@@ -1,13 +1,16 @@
 import { css, styled } from 'styled-components';
 
-export const Wrapper = styled.span`
-  ${({ theme }) => css`
+interface IWrapperProps {
+  visible: boolean;
+}
+export const Wrapper = styled.span<IWrapperProps>`
+  ${({ theme, visible }) => css`
     display: flex;
     background-color: ${theme.colors.gray.dark};
     padding: 10px;
     gap: 2rem;
     position: relative;
-    cursor: pointer;
+    cursor: ${visible ? 'default' : 'pointer'};
 
     img {
       border-radius: 20px;

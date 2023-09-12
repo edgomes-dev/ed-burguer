@@ -1,6 +1,7 @@
 import { InputPrice } from '@/utils/InputPrice';
 import * as S from './styles';
 import { useState } from 'react';
+import { IngredientType } from '@/pages';
 
 export type IngredientsItemType = {
   id: number;
@@ -10,23 +11,10 @@ export type IngredientsItemType = {
 
 type IngredientsItemProps = {
   options: number;
-  items: IngredientsItemType[];
-  changeValue: (add: number, sub: number) => void;
-  complement: boolean;
-  handleComplementOrAdditional: (
-    isComplement: boolean,
-    item: string,
-    isDelete: boolean
-  ) => void;
+  items: IngredientType[];
 };
 
-export function IngredientsItem({
-  options,
-  items,
-  changeValue,
-  complement,
-  handleComplementOrAdditional
-}: IngredientsItemProps) {
+export function IngredientsItem({ options, items }: IngredientsItemProps) {
   const [limitChecked, setLimitChecked] = useState<number[]>([]);
 
   const handleLimitChecked = (add: number, sub: number) => {
@@ -53,13 +41,8 @@ export function IngredientsItem({
       {items.map((item) => (
         <InputPrice
           key={item.id}
-          id={item.id}
-          text={item.text}
-          price={item.price}
-          changeValue={changeValue}
-          complement={complement}
+          ingredient={item}
           limitCheked={handleLimitChecked}
-          handleComplementOrAdditional={handleComplementOrAdditional}
         />
       ))}
     </S.Wrapper>

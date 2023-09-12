@@ -31,7 +31,7 @@ public class ProductCategoryServiceTest {
     @DisplayName("POST Create")
     public void should_createProductCategorySucess() {
         // arrange
-        ProductCategoryDto productCategoryDto = new ProductCategoryDto(null, "Salgados", "/test");
+        ProductCategoryDto productCategoryDto = new ProductCategoryDto(null, "Salgados");
         ProductCategory productCategory = new ProductCategory(1L, "Salgados", "/test");
         Mockito.doReturn(productCategory).when(repository).save(any());
 
@@ -94,7 +94,7 @@ public class ProductCategoryServiceTest {
     @DisplayName("PUT update product category")
     public void should_updateProductCategorySucess_when_idExists() {
         // arrange
-        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Bebidas", "/bebidas");
+        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Bebidas");
         ProductCategory productCategoryExpected = new ProductCategory(1L, "Bebidas", "/bebidas");
         ProductCategory productCategoryExists = new ProductCategory(1L, "Salgados", "/test");
         Mockito.doReturn(Optional.of(productCategoryExists)).when(repository).findById(1L);
@@ -112,7 +112,7 @@ public class ProductCategoryServiceTest {
     @DisplayName("PUT failure update product category")
     public void should_updateProductCategoryFailure_when_idNotExists() {
         // arrange
-        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Bebidas", "/bebidas");
+        ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Bebidas");
 
         // action
         Executable executable = new Executable() {

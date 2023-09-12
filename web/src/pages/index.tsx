@@ -2,25 +2,43 @@ import { HomeTemplate } from '@/templates/HomeTemplate';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { useEffect, useState } from 'react';
 
-export interface IProduct {
-  id: string;
+export type IngredientType = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  repetitions: number;
+};
+
+export type OptionType = {
+  id: number;
+  name: string;
+  maximumAmount: number;
+  required: boolean;
+  optionsRequired: string | null;
+  ingredients: IngredientType[];
+};
+
+export type ProductType = {
+  id: number;
   name: string;
   imageUrl: string;
   description: string;
   price: number;
   repetitions: boolean;
-}
+};
 
-export interface IProductCategory {
-  id: string;
+export type ProductCategoryType = {
+  id: number;
   name: string;
   imageUrl: string;
-  products: IProduct[];
-}
+  options: OptionType[];
+  products: ProductType[];
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch('http://localhost:8082/ed-burguer/product-category');
-  const data: IProductCategory[] = await res.json();
+  const data: ProductCategoryType[] = await res.json();
 
   return {
     props: { data }

@@ -36,8 +36,8 @@ public class IngredientResourceTest {
     @Test
     @DisplayName("Criar com sucesso um Ingredient")
     public void testPostCreateIngredient() throws Exception {
-        IngredientDto ingredientDto = new IngredientDto(null, "Milho e ervilha", 2.0);
-        Ingredient ingredientExpected = new Ingredient(1L, "Milho verde", 2.0, null);
+        IngredientDto ingredientDto = new IngredientDto(null, "Milho e ervilha", "", 2.0, 1);
+        Ingredient ingredientExpected = new Ingredient(1L, "Milho verde", "", 2.0, 1);
         Mockito.doReturn(ingredientExpected).when(ingredientService).create(ingredientDto);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/ingredient")
@@ -52,8 +52,8 @@ public class IngredientResourceTest {
     @Test
     @DisplayName("Retornar todos os ingredients com sucesso")
     public void testGetALLIngredients() throws Exception {
-        Ingredient ingredient = new Ingredient(1L, "Milho", 2.0, null);
-        Ingredient ingredient1 = new Ingredient(2L, "Ervilha", 4.0, null);
+        Ingredient ingredient = new Ingredient(1L, "Milho", "", 2.0, 1);
+        Ingredient ingredient1 = new Ingredient(2L, "Ervilha", "", 4.0, 1);
         Mockito.doReturn(Arrays.asList(ingredient, ingredient1)).when(ingredientService).findAll();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/ingredient"))
@@ -70,7 +70,7 @@ public class IngredientResourceTest {
     @Test
     @DisplayName("Retornar um ingredient com sucesso quando o id for válido")
     public void testGetFindByIdSucessWhenIdExists() throws Exception {
-        Ingredient ingredient = new Ingredient(1L, "Milho e ervilha", 2.0, null);
+        Ingredient ingredient = new Ingredient(1L, "Milho e ervilha", "", 2.0, 1);
         Mockito.doReturn(ingredient).when(ingredientService).findById(1L);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/ingredient/1"))
@@ -93,9 +93,9 @@ public class IngredientResourceTest {
     @Test
     @DisplayName("Atualizar com sucesso um Ingredient")
     public void testPutUpdateIngredientSucess_when_idExists() throws Exception {
-        IngredientDto ingredientDto = new IngredientDto(1L, "Milho e ervilha", 2.0);
-        Ingredient ingredientActual = new Ingredient(1L, "Milho verde", 2.0, null);
-        Ingredient ingredientExpected = new Ingredient(1L, "Milho e ervilha", 4.0, null);
+        IngredientDto ingredientDto = new IngredientDto(1L, "Milho e ervilha", "", 2.0, 1);
+        Ingredient ingredientActual = new Ingredient(1L, "Milho verde", "", 2.0, 1);
+        Ingredient ingredientExpected = new Ingredient(1L, "Milho e ervilha", "", 4.0, 1);
 
         Mockito.doReturn(ingredientActual).when(ingredientService).findById(1L);
         Mockito.doReturn(ingredientExpected).when(ingredientService).update(ingredientDto);
@@ -112,7 +112,7 @@ public class IngredientResourceTest {
     @Test
     @DisplayName("NotFoundException um Ingredient quando o id for inválido")
     public void testPutUpdateIngredientFailure_when_idNotExists() throws Exception {
-        IngredientDto ingredientDto = new IngredientDto(1L, "Milho e ervilha", 2.0);
+        IngredientDto ingredientDto = new IngredientDto(1L, "Milho e ervilha", "", 2.0, 1);
 
         Mockito.doThrow(NotFoundException.class).when(ingredientService).update(ingredientDto);
 

@@ -2,43 +2,26 @@ import { IngredientsItemType } from '@/components/IngredientsItem';
 import * as S from './styles';
 import { AiFillCheckCircle as Checked } from 'react-icons/ai';
 import { useState } from 'react';
+import { Counter } from '@/components/Counter';
+import { IngredientType } from '@/pages';
 
 type InputPriceProps = {
-  changeValue: (add: number, sub: number) => void;
+  ingredient: IngredientType;
   limitCheked: (add: number, sub: number) => boolean;
-  complement: boolean;
-  handleComplementOrAdditional: (
-    isComplement: boolean,
-    item: string,
-    isDelete: boolean
-  ) => void;
-} & IngredientsItemType;
+};
 
-export function InputPrice({
-  id,
-  text,
-  price,
-  changeValue,
-  complement,
-  handleComplementOrAdditional,
-  limitCheked
-}: InputPriceProps) {
+export function InputPrice({ ingredient, limitCheked }: InputPriceProps) {
   const [selected, setSelected] = useState(false);
 
   const handlePrice = (checked: boolean) => {
     if (checked === true) {
       limitCheked(0, 1);
-      changeValue(0, price);
-      handleComplementOrAdditional(complement, text, true);
 
       return setSelected(false);
     }
 
     if (selected === false) {
       if (limitCheked(1, 0)) {
-        changeValue(price, 0);
-        handleComplementOrAdditional(complement, text, false);
-
         return setSelected(true);
       } else {
         console.log('Limite atingido');
@@ -49,27 +32,44 @@ export function InputPrice({
   };
 
   return (
-    <S.Wrapper key={id}>
-      <input type="checkbox" name={`${id}`} checked={selected} readOnly />
+    <S.Wrapper key={ingredient.id}>
+      <input
+        type="checkbox"
+        name={`${ingredient.id}`}
+        checked={selected}
+        readOnly
+      />
       <S.Content
         onClick={(e) => {
           e.preventDefault();
           handlePrice(selected);
         }}
       >
-        <p>{text}</p>
+        <p>{ingredient.name}</p>
         <S.Price>
-          <p>
-            {price.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL'
-            })}
+          <p className="item">
+            (+
+            {ingredient.price
+              ? ingredient.price.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL'
+                })
+              : 0}
+            )
           </p>
-          <span className="checked">
-            <Checked color="green" />
-          </span>
+          <Counter
+            initialValue={0}
+            maxItems={ingredient.repetitions}
+            size="small"
+          />
         </S.Price>
       </S.Content>
     </S.Wrapper>
   );
 }
+
+/*
+
+
+
+*/

@@ -34,9 +34,10 @@ declare module 'styled-components' {
       title: string;
       black: string;
       gray: {
-        light: string;
         background: string;
         dark: string;
+        medium: string;
+        light: string;
       };
     };
     spacings: {

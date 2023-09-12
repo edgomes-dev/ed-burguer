@@ -7,10 +7,11 @@ import lombok.*;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -23,45 +24,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String email;
 
+    @NotBlank
+    private String phone;
+
+    @NotBlank
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    /*
+    @OneToMany
+    private List<Address> addresses  = new ArrayList<>();
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    public void addAddress(Address data) {
+        this.addresses.add(data);
     }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }*/
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddressDtoRequest {
+public class AddressDto {
     private Long id;
 
     private String name;
@@ -21,8 +21,4 @@ public class AddressDtoRequest {
     private String complement;
 
     private Long districtId;
-
-    private Long userId;
-
-
 }
