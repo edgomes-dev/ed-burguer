@@ -12,29 +12,34 @@ export const Wrapper = styled.div<WrapperProps>`
     color: white;
     display: ${visible ? 'grid' : 'none'};
     grid-template-columns: 400px 1fr;
+
+    @media (max-width: 475px) {
+      display: ${visible ? 'block' : 'none'};
+    }
   `}
 `;
 
 export const Content = styled.div`
-  //width: 400px;
-  height: 100vh;
-  background-color: gray;
+  ${({ theme }) => css`
+    height: 100vh;
+    background-color: ${theme.colors.gray.light};
 
-  img {
-    border-radius: 15px;
-    margin: 20px 25%;
-  }
+    img {
+      border-radius: 15px;
+      margin: 20px 25%;
+    }
 
-  .active {
-    background-color: red;
-  }
+    .active {
+      background-color: ${theme.colors.orange.main};
+    }
 
-  .closeIcon {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-  }
+    .closeIcon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+    }
+  `}
 `;
 
 export const IconContainer = styled.div`

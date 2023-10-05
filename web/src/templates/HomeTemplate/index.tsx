@@ -18,8 +18,6 @@ export function HomeTemplate({ data }: HomeTemplatePropsType) {
     slidesToScroll: 3
   };
 
-  console.log(data);
-
   return (
     <>
       <Menu />

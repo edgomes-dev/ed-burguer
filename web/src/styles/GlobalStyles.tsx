@@ -41,7 +41,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
       font-size: ${theme.font.sizes.medium};
       font-family: ${theme.font.family};
-      background-color: ${theme.colors.mainBackground};
+      background-color: ${theme.colors.gray.dark};
     }
     body,
     input,

@@ -25,20 +25,19 @@ declare module 'styled-components' {
         main: string;
         dark: string;
       };
+      gray: {
+        dark: string;
+        medium: string;
+        light: string;
+        lighther: string;
+      };
       red: string;
       white: string;
-      mainBackground: string;
       yellow: string;
       blue: string;
       text: string;
       title: string;
       black: string;
-      gray: {
-        background: string;
-        dark: string;
-        medium: string;
-        light: string;
-      };
     };
     spacings: {
       xxsmall: string;

@@ -13,7 +13,7 @@ export const Wrapper = styled.div<WrapperProps>`
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: ${theme.colors.gray.background};
+    background-color: ${theme.colors.gray.medium};
     color: white;
 
     .close {
@@ -31,7 +31,8 @@ export const Menu = styled.div`
 
     div {
       div {
-        color: ${theme.colors.gray.light};
+        color: ${theme.colors.gray.lighther};
+        font-weight: bolder;
         text-align: end;
       }
     }
@@ -62,7 +63,7 @@ export const Footer = styled.div`
     display: flex;
     padding: 2rem;
     justify-content: space-between;
-    border-top: 1px solid ${theme.colors.gray.medium};
+    background-color: ${theme.colors.gray.dark};
   `}
 `;
 
@@ -70,8 +71,14 @@ export const Observation = styled.div`
   ${({ theme }) => css`
     textarea {
       width: 100%;
-      padding: 1rem;
-      background-color: ${theme.colors.gray.dark};
+      height: 100px;
+      padding: 8px;
+      background-color: ${theme.colors.gray.light};
+      resize: none;
+      box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 4px 0px;
+      border: 1px solid rgb(44, 44, 48);
+      font-size: 16px;
+      color: ${theme.colors.white};
     }
   `}
 `;
@@ -80,6 +87,12 @@ export const Counter = styled.div`
   ${({ theme }) => css`
     font-size: 14pt;
     text-align: center;
+
+    @media (max-width: 475px) {
+      p {
+        font-size: 12pt;
+      }
+    }
   `}
 `;
 
@@ -97,34 +110,9 @@ export const Button = styled.div`
     &:hover {
       background-color: ${theme.colors.orange.dark};
     }
+
+    @media (max-width: 475px) {
+      padding: 0.5rem 2rem;
+    }
   `}
 `;
-
-/*
-
-p {
-      user-select: none;
-    }
-
-    div {
-      display: grid;
-      width: 125px;
-      height: 50px;
-      grid-template-columns: repeat(3, 1fr);
-      align-items: center;
-      border: 1px solid ${theme.colors.gray.light};
-      border-radius: 8px;
-
-      span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-
-        &:hover {
-          background-color: ${theme.colors.orange.main};
-        }
-      }
-    }
-
-*/

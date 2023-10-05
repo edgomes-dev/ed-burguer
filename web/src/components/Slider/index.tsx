@@ -1,12 +1,25 @@
+import { useSliderScript } from '@/utils/sliderScript';
 import * as S from './styles';
 import Image from 'next/image';
-import { IProductCategory } from '@/pages';
+import { useEffect } from 'react';
+
+import {
+  AiOutlineArrowLeft as ArrowLeftIcon,
+  AiOutlineArrowRight as ArrowRightIcon
+} from 'react-icons/ai';
+
+type ProductCategory = {
+  name: string;
+  imageUrl: string;
+};
 
 type SliderPropsType = {
-  data: IProductCategory[];
+  data: ProductCategory[];
 };
 
 export function Slider({ data }: SliderPropsType) {
+  useSliderScript();
+
   return (
     <S.Wrapper>
       <S.Title>
@@ -26,6 +39,15 @@ export function Slider({ data }: SliderPropsType) {
           </S.Item>
         ))}
       </S.Slider>
+      <S.SliderMobile>
+        <ArrowLeftIcon id="prev" />
+        <nav id="slider">
+          {data.map((item) => (
+            <li key={item.name}>{item.name}</li>
+          ))}
+        </nav>
+        <ArrowRightIcon id="next" />
+      </S.SliderMobile>
     </S.Wrapper>
   );
 }

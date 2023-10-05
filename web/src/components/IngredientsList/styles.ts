@@ -13,7 +13,7 @@ export const Title = styled.div<TitlePropsType>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: ${theme.colors.gray.medium};
+    background-color: ${theme.colors.gray.lighther};
     padding: 1.6rem;
     border-radius: 4px;
 

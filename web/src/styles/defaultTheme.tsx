@@ -25,22 +25,20 @@ export const defualtTheme: DefaultTheme = {
       main: '#DB790F',
       dark: '#C97720'
     },
+    gray: {
+      dark: '#161618',
+      medium: '#1D1E20',
+      light: '#222325',
+      lighther: '#404042'
+    },
     red: '#970918',
     white: '#F5F4E3',
-    mainBackground: '#F5EBDC',
     yellow: '#E7A94B',
     blue: '#001E4B',
     text: '#502314',
     title: '#D62300',
-    black: '#161618',
-    gray: {
-      background: '#1D1E20',
-      dark: '#222325',
-      medium: '#404042',
-      light: '#A8A89F'
-    }
+    black: '#161618'
   },
-
   spacings: {
     xxsmall: '0.8rem',
     xsmall: '1.6rem',

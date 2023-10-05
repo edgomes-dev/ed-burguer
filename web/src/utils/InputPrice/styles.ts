@@ -12,7 +12,7 @@ export const Content = styled.div`
     justify-content: space-between;
     margin: 16px 0;
     padding: 16px 0;
-    border-bottom: 1px solid ${theme.colors.gray.medium};
+    border-bottom: 1px solid ${theme.colors.gray.lighther};
 
     p {
       font-size: 12pt;

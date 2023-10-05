@@ -29,6 +29,31 @@ export const Menu = styled.div`
         border-radius: 180%;
       }
     }
+
+    @media (max-width: 475px) {
+      width: 90%;
+      margin: 20px auto;
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
+
+      h2 {
+        font-size: 14pt;
+      }
+
+      svg {
+        width: 25px;
+        height: 25px;
+        transition: none;
+
+        &:hover {
+          background-color: none;
+          border-radius: 0;
+        }
+      }
+    }
   `}
 `;
 
@@ -40,5 +65,11 @@ export const Container = styled.div<ContainerProps>`
     display: ${visible ? 'grid' : 'none'};
     grid-template-columns: repeat(auto-fit, minmax(428px, 1fr));
     gap: 20px;
+
+    @media (max-width: 475px) {
+      display: ${visible ? 'flex' : 'none'};
+      flex-direction: column;
+      align-items: center;
+    }
   `}
 `;

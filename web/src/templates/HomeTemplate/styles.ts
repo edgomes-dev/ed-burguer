@@ -3,6 +3,13 @@ import { css, styled } from 'styled-components';
 export const Wrapper = styled.div`
   width: 80%;
   margin: 0 auto;
+
+  @media (min-width: 500px) and (max-width: 900px) {
+    width: 90%;
+  }
+  @media (max-width: 475px) {
+    width: 100%;
+  }
 `;
 
 export const Search = styled.div`
@@ -10,9 +17,11 @@ export const Search = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 90%;
+    margin: 0 auto;
 
     input {
-      background-color: ${theme.colors.white};
+      background-color: ${theme.colors.gray.light};
       width: 60vw;
       border: none;
       border-radius: 10px;
@@ -22,7 +31,7 @@ export const Search = styled.div`
     }
 
     div {
-      background-color: ${theme.colors.gray};
+      background-color: ${theme.colors.gray.light};
       color: white;
       text-align: center;
       padding: 15px;
@@ -30,6 +39,19 @@ export const Search = styled.div`
 
       span {
         font-weight: bolder;
+      }
+    }
+
+    @media (max-width: 475px) {
+      input {
+        width: 45vw;
+        visibility: hidden;
+      }
+
+      div {
+        padding: 12px;
+        padding-top: 30px;
+        font-size: 10pt;
       }
     }
   `}

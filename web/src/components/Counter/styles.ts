@@ -5,11 +5,12 @@ const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     display: grid;
     width: 80px;
-    height: 25px;
+    height: 35px;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     border: 1px solid ${theme.colors.gray.light};
     border-radius: 4px;
+    justify-content: center;
     text-align: center;
 
     button {
@@ -19,7 +20,7 @@ const wrapperModifiers = {
       height: 100%;
       background-color: transparent;
       color: ${theme.colors.white};
-      font-size: 10pt;
+      font-size: 14pt;
       border: none;
       border-radius: 4px;
 
@@ -61,6 +62,7 @@ export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, size }) => css`
     ${!!size && wrapperModifiers[size](theme)}
 
+    background-color: ${theme.colors.gray.light};
     p {
       user-select: none;
     }

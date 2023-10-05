@@ -3,8 +3,10 @@ import * as S from './styles';
 
 import {
   AiOutlineShoppingCart as ShoppingCart,
-  AiOutlineMenu as MenuIcon
+  AiOutlineMenu as MenuIcon,
+  AiOutlineClose as CloseIcon
 } from 'react-icons/ai';
+import { FiSearch as SearchIcon } from 'react-icons/fi';
 import { MdAccountCircle as AccountIcon } from 'react-icons/md';
 import { useState } from 'react';
 import { MenuLeft } from '../MenuLeft';
@@ -14,6 +16,7 @@ const price = 0.0;
 export function Menu() {
   const [accountHidden, setAccountHidden] = useState(true);
   const [visibleMenuLeft, setVisibleMenuLeft] = useState(false);
+  const [search, setSearch] = useState(false);
 
   function closeIcon() {
     return setVisibleMenuLeft(false);
@@ -23,13 +26,17 @@ export function Menu() {
     <S.Wrapper>
       <MenuLeft visible={visibleMenuLeft} closeMenu={() => closeIcon()} />
       <ul>
+        <S.Search search={search}>
+          <input type="search" placeholder="Pesquisar" />
+          <CloseIcon size={28} color="#fff" onClick={() => setSearch(false)} />
+        </S.Search>
         <S.LeftArea>
           <MenuIcon onClick={(e) => setVisibleMenuLeft(!visibleMenuLeft)} />
-          <Link href="/">Inicio</Link>
+          <Link href="/">Ed Burguer</Link>
         </S.LeftArea>
-        <S.RightArea>
+        <S.RightArea search={search}>
           <S.Cart>
-            <ShoppingCart size={24} />
+            <ShoppingCart size={28} />
             <span>
               {price.toLocaleString('pt-BR', {
                 style: 'currency',
@@ -37,19 +44,20 @@ export function Menu() {
               })}
             </span>
           </S.Cart>
-          <S.Account account={accountHidden}>
+          <S.Account>
             <span>
               <AccountIcon
                 onClick={() => setAccountHidden(!accountHidden)}
                 size={28}
               />
             </span>
-            <ul>
-              <li>
-                <Link href="/login">Fazer login</Link>
-              </li>
-            </ul>
           </S.Account>
+          <SearchIcon
+            id="searchButton"
+            size={28}
+            color="#fff"
+            onClick={() => setSearch(true)}
+          />
         </S.RightArea>
       </ul>
     </S.Wrapper>

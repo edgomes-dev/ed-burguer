@@ -25,15 +25,17 @@ export function ListItem({ category, product, options }: ListItemProps) {
           height={150}
         />
         <S.Content>
-          <h3>{product.name}</h3>
+          <p id="title">{product.name}</p>
           {!!product.description && <p>{product.description}</p>}
-          <span>
+        </S.Content>
+        <S.Price>
+          <p>
             {product.price.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL'
             })}
-          </span>
-        </S.Content>
+          </p>
+        </S.Price>
         <S.Button>
           <AddIcon />
         </S.Button>
