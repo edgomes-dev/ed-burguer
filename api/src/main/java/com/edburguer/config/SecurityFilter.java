@@ -1,5 +1,4 @@
 package com.edburguer.config;
-/*
 import com.edburguer.repository.UserRepository;
 import com.edburguer.service.UserService;
 import com.edburguer.service.impl.TokenServiceImpl;
@@ -50,4 +49,3 @@ public class SecurityFilter extends OncePerRequestFilter {
          return authHeader.replace("Bearer ", "");
     }
 }
-*/

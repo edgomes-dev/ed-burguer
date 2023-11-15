@@ -6,6 +6,8 @@ import { AiOutlineClose as CloseIcon } from 'react-icons/ai';
 import { OptionType, ProductType } from '@/pages';
 import { useState } from 'react';
 import { Counter } from '../Counter';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/redux/cartSlice';
 
 type ModalProductProps = {
   visible: boolean;
@@ -21,6 +23,8 @@ export function ModalProduct({
   product,
   options
 }: ModalProductProps) {
+  const dispatch = useDispatch();
+
   return (
     <S.Wrapper visible={visible}>
       <S.Menu>
@@ -56,6 +60,9 @@ export function ModalProduct({
           <h3>Observações</h3>
           <textarea placeholder="Escreva as observações do produto aqui"></textarea>
         </S.Observation>
+        <button onClick={() => dispatch(addToCart({ item: product.name }))}>
+          Adicionar teste
+        </button>
       </S.Content>
       <S.Footer>
         <S.Counter>

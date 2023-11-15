@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-category")
+@RequestMapping("/product-categories")
 public class ProductCategoryResource {
     @Autowired
     ProductCategoryService productCategoryService;

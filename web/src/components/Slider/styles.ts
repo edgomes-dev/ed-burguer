@@ -80,7 +80,7 @@ export const Item = styled.div`
 
 export const SliderMobile = styled.div`
   ${({ theme }) => css`
-    display: flex;
+    display: none;
     background-color: ${theme.colors.gray.light};
 
     nav {
@@ -89,6 +89,10 @@ export const SliderMobile = styled.div`
       li {
         list-style: none;
       }
+    }
+
+    @media (max-width: 475px) {
+      display: flex;
     }
   `}
 `;

@@ -2,6 +2,8 @@ import { css, styled } from 'styled-components';
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
+    margin: 0px 100px 0px 100px;
+
     h2 {
       color: ${theme.colors.title};
     }
@@ -10,7 +12,7 @@ export const Wrapper = styled.div`
 
 export const Cards = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 4rem;
 `;
@@ -43,4 +45,8 @@ export const Card = styled.div`
   `}
 `;
 
-export const Orders = styled.div``;
+export const Orders = styled.div`
+  h2 {
+    margin: 50px 0 25px;
+  }
+`;

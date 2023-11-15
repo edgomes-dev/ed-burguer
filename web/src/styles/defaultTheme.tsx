@@ -28,8 +28,8 @@ export const defualtTheme: DefaultTheme = {
     gray: {
       dark: '#161618',
       medium: '#1D1E20',
-      light: '#222325',
-      lighther: '#404042'
+      light: '#404042',
+      lighther: '#F2F2F2'
     },
     red: '#970918',
     white: '#F5F4E3',

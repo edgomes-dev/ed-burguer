@@ -4,6 +4,7 @@ import { Menu } from '@/components/Menu';
 import * as S from './styles';
 import { ProductCategoryType } from '@/pages';
 import { Slider } from '@/components/Slider';
+import { useEffect, useState } from 'react';
 
 type HomeTemplatePropsType = {
   data: ProductCategoryType[];

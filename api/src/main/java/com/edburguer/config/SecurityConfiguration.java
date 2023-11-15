@@ -1,5 +1,4 @@
 package com.edburguer.config;
-/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,13 +25,15 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                .cors().disable()
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
+                        /*
                         .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .antMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .antMatchers(HttpMethod.GET, "/product-category").permitAll()
-                        .antMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .antMatchers(HttpMethod.GET, "/product-categories").permitAll()
+                        .antMatchers(HttpMethod.POST, "/product").hasRole("ADMIN")*/
+                        .anyRequest().permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -48,4 +49,3 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 }
-*/

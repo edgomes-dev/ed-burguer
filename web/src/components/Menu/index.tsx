@@ -36,7 +36,9 @@ export function Menu() {
         </S.LeftArea>
         <S.RightArea search={search}>
           <S.Cart>
-            <ShoppingCart size={28} />
+            <Link href="/cart">
+              <ShoppingCart color="#fff" size={28} />
+            </Link>
             <span>
               {price.toLocaleString('pt-BR', {
                 style: 'currency',

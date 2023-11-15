@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/district")
+@RequestMapping("/districts")
 public class DistrictResource {
     @Autowired
     private DistrictService districtService;

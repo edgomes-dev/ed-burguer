@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 12rem;
     align-items: center;
     background-color: ${theme.colors.white};
     padding: 5rem;

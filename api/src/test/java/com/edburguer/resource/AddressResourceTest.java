@@ -28,7 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AddressResourceTest {
+public class
+AddressResourceTest {
     @MockBean
     private AddressService addressService;
 
@@ -45,7 +46,7 @@ public class AddressResourceTest {
 
         Mockito.doReturn(addressExpected).when(addressService).create(addressDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/address")
+        mockMvc.perform(MockMvcRequestBuilders.post("/addresses")
                 .content(asJsonString(addressDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -65,7 +66,7 @@ public class AddressResourceTest {
 
         Mockito.doReturn(Arrays.asList(address, address2)).when(addressService).findAll();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/address"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/addresses"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -84,7 +85,7 @@ public class AddressResourceTest {
         User user = new User(1L, "Ed Gomes", "ed@gmail.com", "81981112222", "senha123", Role.USER, Arrays.asList(address));
         Mockito.doReturn(address).when(addressService).findById(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/address/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/addresses/1"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -97,7 +98,7 @@ public class AddressResourceTest {
     public void testGetFindByIdFailure_when_IdNotExists() throws Exception {
         Mockito.doThrow(NotFoundException.class).when(addressService).findById(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/address/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/addresses/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -116,7 +117,7 @@ public class AddressResourceTest {
         Mockito.doReturn(addressExists).when(addressService).findById(1L);
         Mockito.doReturn(addressExpected).when(addressService).update(addressDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/address")
+        mockMvc.perform(MockMvcRequestBuilders.put("/addresses")
                 .content(asJsonString(addressDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -133,7 +134,7 @@ public class AddressResourceTest {
 
         Mockito.doThrow(NotFoundException.class).when(addressService).update(addressDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/address")
+        mockMvc.perform(MockMvcRequestBuilders.put("/addresses")
                         .content(asJsonString(addressDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

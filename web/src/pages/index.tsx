@@ -37,7 +37,9 @@ export type ProductCategoryType = {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch('http://localhost:8082/ed-burguer/product-category');
+  const res = await fetch(
+    'http://localhost:8082/ed-burguer/product-categories'
+  );
   const data: ProductCategoryType[] = await res.json();
 
   return {

@@ -1,13 +1,18 @@
 import { AdminMenu } from '@/components/AdminComponents/AdminMenu';
 import * as S from './styles';
 import { AdminMenuLeft } from '@/components/AdminComponents/AdminMenuLeft';
+import { ReactNode } from 'react';
 
-export function AdminBasetemplate() {
+interface IProps {
+  children: ReactNode;
+}
+
+export function AdminBasetemplate({ children }: IProps) {
   return (
     <S.Wrapper>
       <AdminMenuLeft />
       <AdminMenu />
-      <S.Content>test</S.Content>
+      <S.Content>{children}</S.Content>
     </S.Wrapper>
   );
 }

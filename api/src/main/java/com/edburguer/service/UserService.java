@@ -18,5 +18,5 @@ public interface UserService {
 
     void delete(Long id);
 
-    //void saveAuth(SignUpRequest data);
+    void saveAuth(SignUpRequest data);
 }

@@ -23,12 +23,12 @@ export function AdminMenuLeft() {
       <S.Content>
         <ul>
           <li>
-            <Link href="/">
+            <Link href="/admin">
               <BoxOrders /> Live order
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/admin/order/history">
               <OrderHistory /> Order History
             </Link>
           </li>
@@ -59,7 +59,6 @@ export function AdminMenuLeft() {
           </li>
         </ul>
       </S.Content>
-      <p>Dark mode</p>
     </S.Wrapper>
   );
 }

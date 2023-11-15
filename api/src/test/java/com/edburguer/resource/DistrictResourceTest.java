@@ -43,7 +43,7 @@ public class DistrictResourceTest {
         DistrictDto districtToReturn = new DistrictDto(1L, "Test", 3.0);
         Mockito.doReturn(districtToReturn).when(service).create(any());
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/district")
+        mockMvc.perform(MockMvcRequestBuilders.post("/districts")
                 .content(asJsonString(districtToPost))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -72,7 +72,7 @@ public class DistrictResourceTest {
 
         Mockito.doReturn(list).when(service).findAll();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/district"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/districts"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -94,7 +94,7 @@ public class DistrictResourceTest {
 
         Mockito.doReturn(districtDto).when(service).findById(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/district/{id}", 1L))
+        mockMvc.perform(MockMvcRequestBuilders.get("/districts/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", Is.is(1)))
@@ -107,7 +107,7 @@ public class DistrictResourceTest {
     void testGetDistrictByIdFail() throws Exception {
         Mockito.doThrow(NotFoundException.class).when(service).findById(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/district/{id}", 1L))
+        mockMvc.perform(MockMvcRequestBuilders.get("/districts/{id}", 1L))
                 .andExpect(status().isNotFound());
     }
 

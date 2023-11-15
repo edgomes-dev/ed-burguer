@@ -40,7 +40,7 @@ public class IngredientResourceTest {
         Ingredient ingredientExpected = new Ingredient(1L, "Milho verde", "", 2.0, 1);
         Mockito.doReturn(ingredientExpected).when(ingredientService).create(ingredientDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/ingredient")
+        mockMvc.perform(MockMvcRequestBuilders.post("/ingredients")
                 .content(asJsonString(ingredientDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -56,7 +56,7 @@ public class IngredientResourceTest {
         Ingredient ingredient1 = new Ingredient(2L, "Ervilha", "", 4.0, 1);
         Mockito.doReturn(Arrays.asList(ingredient, ingredient1)).when(ingredientService).findAll();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/ingredient"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/ingredients"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -73,7 +73,7 @@ public class IngredientResourceTest {
         Ingredient ingredient = new Ingredient(1L, "Milho e ervilha", "", 2.0, 1);
         Mockito.doReturn(ingredient).when(ingredientService).findById(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/ingredient/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/ingredients/1"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -86,7 +86,7 @@ public class IngredientResourceTest {
     public void testGetFindByIdFailureWhenIdNotExists() throws Exception {
         Mockito.doThrow(NotFoundException.class).when(ingredientService).findById(10L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/ingredient/10"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/ingredients/10"))
                 .andExpect(status().isNotFound());
     }
 
@@ -100,7 +100,7 @@ public class IngredientResourceTest {
         Mockito.doReturn(ingredientActual).when(ingredientService).findById(1L);
         Mockito.doReturn(ingredientExpected).when(ingredientService).update(ingredientDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/ingredient")
+        mockMvc.perform(MockMvcRequestBuilders.put("/ingredients")
                         .content(asJsonString(ingredientDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -116,7 +116,7 @@ public class IngredientResourceTest {
 
         Mockito.doThrow(NotFoundException.class).when(ingredientService).update(ingredientDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/ingredient")
+        mockMvc.perform(MockMvcRequestBuilders.put("/ingredients")
                         .content(asJsonString(ingredientDto))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

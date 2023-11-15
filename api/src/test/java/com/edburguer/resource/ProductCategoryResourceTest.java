@@ -42,7 +42,7 @@ public class ProductCategoryResourceTest {
         ProductCategory productCategoryExpected = new ProductCategory(1L, "Salgados", "/salgados");
         Mockito.doReturn(productCategoryExpected).when(service).create(productCategoryDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/product-category")
+        mockMvc.perform(MockMvcRequestBuilders.post("/product-categories")
                 .content(asJsonString(productCategoryDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -59,7 +59,7 @@ public class ProductCategoryResourceTest {
         ProductCategory productCategoryTwo = new ProductCategory(2L, "Bebidas", "/bebidas");
         Mockito.doReturn(Arrays.asList(productCategory, productCategoryTwo)).when(service).findAll();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/product-category"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/product-categories"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -76,7 +76,7 @@ public class ProductCategoryResourceTest {
         ProductCategory productCategory = new ProductCategory(1L, "Salgados", "/salgados");
         Mockito.doReturn(productCategory).when(service).findById(1L);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/product-category/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/product-categories/1"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -90,7 +90,7 @@ public class ProductCategoryResourceTest {
     public void testGetFindByIdFailure_when_idNotExists() throws Exception {
         Mockito.doThrow(NotFoundException.class).when(service).findById(1L);
 
-        mockMvc. perform(MockMvcRequestBuilders.get("/product-category/1"))
+        mockMvc. perform(MockMvcRequestBuilders.get("/product-categories/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -103,7 +103,7 @@ public class ProductCategoryResourceTest {
         Mockito.doReturn(productCategoryExists).when(service).findById(1L);
         Mockito.doReturn(productCategoryExpected).when(service).update(productCategoryDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/product-category")
+        mockMvc.perform(MockMvcRequestBuilders.put("/product-categories")
                 .content(asJsonString(productCategoryDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -118,7 +118,7 @@ public class ProductCategoryResourceTest {
         ProductCategoryDto productCategoryDto = new ProductCategoryDto(1L, "Salgados");
         Mockito.doThrow(NotFoundException.class).when(service).update(productCategoryDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/product-category")
+        mockMvc.perform(MockMvcRequestBuilders.put("/product-categories")
                 .content(asJsonString(productCategoryDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());

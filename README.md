@@ -7,7 +7,7 @@
 <img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" />
 <img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />
 
-Este projeto é um desafio que fiz para mim mesmo, desenvolver um projeto complexo sozinho. O objetivo principal é criar por completo o sistema delivery, utilizando Next com Java no back, penso em também criar um app mobile com React Native.
+Este é um projeto pessoal que fiz do completo zero como uma forma de colocar meus conhecimentos em práticas, está sendo um processo demorado porém de muito aprendizado
 
 ## Tecnologias Utilizadas
 
@@ -26,4 +26,5 @@ Este projeto é um desafio que fiz para mim mesmo, desenvolver um projeto comple
 ### Observação
 
 - O projeto ainda está em desenvolvimento.
-- Irei finalizar a página web e incrementar mais algumas coisas no back(como os pedidos por exemplo). Após isso irei ver algumas questões da arquitetura desse projeto e regras de négocios.
+- Front preciso olhar como está essa nova versão do Next, muita coisa mudou e tá quebrando a aplicação, com alguns bugs e performance baixa.
+- O back está quase pronto, falta apenas finalizar o serviço dos pedidos e adicionar mais alguns testes.
