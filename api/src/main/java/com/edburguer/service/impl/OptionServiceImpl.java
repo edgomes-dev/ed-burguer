@@ -3,13 +3,17 @@ package com.edburguer.service.impl;
 import com.edburguer.dto.OptionDto;
 import com.edburguer.entity.Ingredient;
 import com.edburguer.entity.Option;
+import com.edburguer.entity.ProductCategory;
 import com.edburguer.exception.NotFoundException;
 import com.edburguer.mapper.OptionMapper;
 import com.edburguer.repository.OptionRepository;
+import com.edburguer.repository.ProductCategoryRepository;
 import com.edburguer.service.IngredientService;
 import com.edburguer.service.OptionService;
+import com.edburguer.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +24,25 @@ public class OptionServiceImpl implements OptionService {
     private OptionRepository optionRepository;
 
     @Autowired
+    private ProductCategoryService productCategoryService;
+
+    @Autowired
+    private ProductCategoryRepository productCategoryRepository;
+
+    @Autowired
     private IngredientService ingredientService;
 
+    @Transactional
     @Override
     public Option create(OptionDto dto) {
+        ProductCategory category = productCategoryService.findById(dto.getProductCategory());
         List<Ingredient> ingredients = dto.getIngredients().stream().map(el -> ingredientService.findById(el)).toList();
-        Option entity = OptionMapper.fromDtoToEntity(dto, ingredients);
+        Option entity = optionRepository.save(OptionMapper.fromDtoToEntity(dto, ingredients));
 
-        return optionRepository.save(entity);
+        category.addOption(entity);
+        productCategoryRepository.save(category);
+
+        return entity;
     }
 
     @Override
@@ -50,7 +65,6 @@ public class OptionServiceImpl implements OptionService {
         entity.setName(dto.getName());
         entity.setMaximumAmount(dto.getMaximumAmount());
         entity.setRequired(dto.getRequired());
-        entity.setOptionsRequired(dto.getOptionsRequired());
 
         List<Ingredient> ingredients = dto.getIngredients().stream().map(el -> ingredientService.findById(el)).toList();
         entity.setIngredients(ingredients);

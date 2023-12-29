@@ -21,4 +21,6 @@ public class AddressDto {
     private String complement;
 
     private Long districtId;
+
+    private Long userId;
 }

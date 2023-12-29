@@ -1,6 +1,6 @@
 import { Menu } from '@/components/Menu';
 import * as S from './styles';
-import { IngredientsList } from '@/components/IngredientsList';
+import { IngredientsList } from '@/components/OptionsList';
 import { FormEvent, useState } from 'react';
 
 const itemsTwo = [

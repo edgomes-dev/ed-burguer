@@ -1,6 +1,7 @@
 package com.edburguer.dto;
 
 import com.edburguer.entity.Role;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Enumerated;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
+@AllArgsConstructor
 public class UserDto {
     private Long id;
 

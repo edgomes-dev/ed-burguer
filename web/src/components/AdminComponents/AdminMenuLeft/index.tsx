@@ -16,49 +16,42 @@ import {
 } from 'react-icons/fi';
 import { BiMessageDetail as MessageIcon } from 'react-icons/bi';
 
+import { IoNewspaper } from 'react-icons/io5';
+
 export function AdminMenuLeft() {
   return (
     <S.Wrapper>
-      <p>Ed Burguer</p>
-      <S.Content>
+      <S.TopArea>
         <ul>
           <li>
             <Link href="/admin">
-              <BoxOrders /> Live order
+              <StockIcon size={30} /> Central
             </Link>
           </li>
           <li>
             <Link href="/admin/order/history">
-              <OrderHistory /> Order History
+              <OrderHistory size={30} /> Pedidos
             </Link>
           </li>
           <li>
-            <Link href="/">
-              <Offers /> Offers
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <ProductsIcon /> Products
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <StockIcon /> Stock
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <MessageIcon /> Message
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <SettingsIcon /> Settings
+            <Link href="/admin/order/history">
+              <IoNewspaper size={30} /> Cardápio
             </Link>
           </li>
         </ul>
-      </S.Content>
+      </S.TopArea>
+      <S.BottomArea>
+        <li>
+          <Link href="/">
+            <ProductsIcon size={30} /> Estoque
+          </Link>
+        </li>
+        <li>
+          <Link href="/">
+            <SettingsIcon size={30} /> Settings
+          </Link>
+        </li>
+      </S.BottomArea>
     </S.Wrapper>
   );
 }

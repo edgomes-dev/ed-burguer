@@ -1,9 +1,14 @@
 import { css, styled } from 'styled-components';
 
-export const Wrapper = styled.label`
-  input {
-    display: none;
-  }
+type WrapperProps = {
+  required: boolean;
+};
+export const Wrapper = styled.label<WrapperProps>`
+  ${({ theme, required }) => css`
+    input {
+      display: ${required ? 'block' : 'none'};
+    }
+  `}
 `;
 
 export const Content = styled.div`
@@ -16,6 +21,10 @@ export const Content = styled.div`
 
     p {
       font-size: 12pt;
+    }
+
+    input[type='radio'] {
+      accent-color: ${theme.colors.orange.main};
     }
   `}
 `;

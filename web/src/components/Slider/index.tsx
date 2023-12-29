@@ -1,12 +1,12 @@
 import { useSliderScript } from '@/utils/sliderScript';
 import * as S from './styles';
 import Image from 'next/image';
-import { useEffect } from 'react';
 
 import {
   AiOutlineArrowLeft as ArrowLeftIcon,
   AiOutlineArrowRight as ArrowRightIcon
 } from 'react-icons/ai';
+import { ProductCategoryType } from '@/pages';
 
 type ProductCategory = {
   name: string;
@@ -14,7 +14,7 @@ type ProductCategory = {
 };
 
 type SliderPropsType = {
-  data: ProductCategory[];
+  data: ProductCategoryType[];
 };
 
 export function Slider({ data }: SliderPropsType) {
@@ -24,11 +24,10 @@ export function Slider({ data }: SliderPropsType) {
     <S.Wrapper>
       <S.Title>
         <h2>Categorias</h2>
-        <button>ver todas</button>
       </S.Title>
       <S.Slider>
         {data.map((item) => (
-          <S.Item key={item.name}>
+          <S.Item key={item.name} href={`#${item.id}`}>
             <Image
               src={'/img/' + item.imageUrl}
               alt={item.name}

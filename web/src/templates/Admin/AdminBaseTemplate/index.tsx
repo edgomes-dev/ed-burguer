@@ -10,8 +10,8 @@ interface IProps {
 export function AdminBasetemplate({ children }: IProps) {
   return (
     <S.Wrapper>
-      <AdminMenuLeft />
       <AdminMenu />
+      <AdminMenuLeft />
       <S.Content>{children}</S.Content>
     </S.Wrapper>
   );

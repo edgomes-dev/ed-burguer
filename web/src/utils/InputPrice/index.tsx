@@ -1,4 +1,3 @@
-import { IngredientsItemType } from '@/components/IngredientsItem';
 import * as S from './styles';
 import { AiFillCheckCircle as Checked } from 'react-icons/ai';
 import { useState } from 'react';
@@ -7,69 +6,68 @@ import { IngredientType } from '@/pages';
 
 type InputPriceProps = {
   ingredient: IngredientType;
-  limitCheked: (add: number, sub: number) => boolean;
+  required: boolean;
+  changeItemsLimit: (operator: '+' | '-') => boolean | void;
+  changeIngredientsPrice: (operator: '+' | '-', price: number) => void;
 };
 
-export function InputPrice({ ingredient, limitCheked }: InputPriceProps) {
-  const [selected, setSelected] = useState(false);
+export function InputPrice({
+  ingredient,
+  required = false,
+  changeItemsLimit,
+  changeIngredientsPrice
+}: InputPriceProps) {
+  const [quantity, setQuantity] = useState(0);
 
-  const handlePrice = (checked: boolean) => {
-    if (checked === true) {
-      limitCheked(0, 1);
-
-      return setSelected(false);
+  function changeQuantity(operator: '+' | '-') {
+    if (quantity === ingredient.repetitions && operator === '+') return;
+    if (operator === '+') {
+      if (changeItemsLimit('+')) return;
+      setQuantity(quantity + 1);
+      changeIngredientsPrice('+', ingredient.price);
     }
-
-    if (selected === false) {
-      if (limitCheked(1, 0)) {
-        return setSelected(true);
-      } else {
-        console.log('Limite atingido');
-
-        return setSelected(false);
-      }
+    if (quantity === 0 && operator === '-') return;
+    if (operator === '-') {
+      if (changeItemsLimit('-')) return;
+      setQuantity(quantity - 1);
+      changeIngredientsPrice('-', ingredient.price);
     }
-  };
+  }
 
-  return (
-    <S.Wrapper key={ingredient.id}>
-      <input
-        type="checkbox"
-        name={`${ingredient.id}`}
-        checked={selected}
-        readOnly
-      />
-      <S.Content
-        onClick={(e) => {
-          e.preventDefault();
-          handlePrice(selected);
-        }}
-      >
-        <p>{ingredient.name}</p>
-        <S.Price>
-          <p className="item">
-            (+
-            {ingredient.price
-              ? ingredient.price.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL'
-                })
-              : 0}
-            )
-          </p>
-          <Counter
-            initialValue={0}
-            maxItems={ingredient.repetitions}
-            size="small"
-          />
-        </S.Price>
-      </S.Content>
-    </S.Wrapper>
-  );
+  if (required) {
+    return (
+      <S.Wrapper required={required}>
+        <S.Content>
+          {ingredient.name}
+          <input type="radio" name="option" value={ingredient.id} />
+        </S.Content>
+      </S.Wrapper>
+    );
+  } else {
+    return (
+      <S.Wrapper required={required}>
+        <S.Content>
+          <p>{ingredient.name}</p>
+          <S.Price>
+            <p className="item">
+              (+
+              {ingredient.price
+                ? ingredient.price.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  })
+                : '0'}
+              )
+            </p>
+            <Counter
+              value={quantity}
+              size="small"
+              maxItems={ingredient.repetitions}
+              changeQuantity={(operator: '+' | '-') => changeQuantity(operator)}
+            />
+          </S.Price>
+        </S.Content>
+      </S.Wrapper>
+    );
+  }
 }
-
-/*
-
-
-
-*/

@@ -1,6 +1,7 @@
 package com.edburguer.service.impl;
 
 import com.edburguer.dto.ProductDto;
+import com.edburguer.dto.ProductDtoInitDB;
 import com.edburguer.entity.Ingredient;
 import com.edburguer.entity.Product;
 import com.edburguer.entity.ProductCategory;
@@ -31,6 +32,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     IngredientService ingredientService;
 
+    @Transactional
     @Override
     public Product create(ProductDto dto) {
         ProductCategory productCategory = productCategoryService.findById(dto.getProductCategoryId());
@@ -39,6 +41,29 @@ public class ProductServiceImpl implements ProductService {
         //Ingredient ingredient = ingredientService.findById(1L);
 
         //Product product = new Product(null, dto.getName(), dto.getImageUrl(), dto.getPrice(), null, null);
+        Product product = new Product();
+        product.setName(dto.getName());
+        product.setImageUrl(dto.getImageUrl());
+        product.setPrice(dto.getPrice());
+        product.setDescription(dto.getDescription());
+        product.addIngredient(ingredientList);
+
+        Product entity = productRepository.save(product);
+
+        productCategory.addProduct(entity);
+
+        productCategoryRepository.save(productCategory);
+
+        return entity;
+    }
+
+    @Transactional
+    @Override
+    public Product create(ProductDtoInitDB dto) {
+        ProductCategory productCategory = productCategoryService.findById(dto.getProductCategoryId());
+
+        List<Ingredient> ingredientList = dto.getIngredients().stream().map(id -> ingredientService.findById(id)).toList();
+
         Product product = new Product();
         product.setName(dto.getName());
         product.setImageUrl(dto.getImageUrl());

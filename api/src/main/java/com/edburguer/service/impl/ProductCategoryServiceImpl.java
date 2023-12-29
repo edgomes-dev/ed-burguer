@@ -1,6 +1,7 @@
 package com.edburguer.service.impl;
 
 import com.edburguer.dto.ProductCategoryDto;
+import com.edburguer.dto.initDb.ProductCategoryInitDbDto;
 import com.edburguer.entity.ProductCategory;
 import com.edburguer.exception.BadRequestException;
 import com.edburguer.exception.NotFoundException;
@@ -11,9 +12,7 @@ import com.edburguer.utils.UploadImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,6 +29,16 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         String filePath = UploadImage.upload(dto.getFile());
 
         ProductCategory productCategory = ProductCategoryMapper.fromDtoToEntity(dto, filePath);
+
+        return productCategoryRepository.save(productCategory);
+    }
+
+    @Override
+    @Transactional
+    public ProductCategory create(ProductCategoryInitDbDto dto) {
+        if(Objects.nonNull(dto.getId())) throw new BadRequestException("ID precisa ser nulo");
+
+        ProductCategory productCategory = ProductCategoryMapper.fromDtoToEntity(dto);
 
         return productCategoryRepository.save(productCategory);
     }

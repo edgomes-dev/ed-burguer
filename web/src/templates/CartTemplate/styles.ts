@@ -51,89 +51,6 @@ export const Content = styled.div`
       font-weight: bolder;
       margin-top: 4rem;
     }
-
-    a {
-      background-color: ${theme.colors.orange.main};
-      color: ${theme.colors.white};
-      margin-top: 2rem;
-      font-size: 12pt;
-      font-weight: bolder;
-      padding: 11px 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: ${theme.transition.default};
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      &:hover {
-        background-color: ${theme.colors.orange.dark};
-      }
-    }
-  `}
-`;
-
-export const Product = styled.div`
-  ${({ theme }) => css`
-    display: grid;
-    grid-template-columns: 500px 100px;
-    grid-template-areas:
-      'leftArea rightArea'
-      'observation observation';
-    background-color: ${theme.colors.gray.light};
-    margin-bottom: 20px;
-  `}
-`;
-
-export const LeftArea = styled.div`
-  display: flex;
-  position: relative;
-  grid-area: leftArea;
-
-  img {
-    margin-right: 10px;
-  }
-
-  span {
-    font-size: 9pt;
-  }
-
-  .priceArea {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: absolute;
-    bottom: 2px;
-    font-weight: bolder;
-  }
-`;
-
-export const RightArea = styled.div`
-  ${({ theme }) => css`
-    position: relative;
-    grid-area: rightArea;
-
-    div {
-      position: absolute;
-      right: 0;
-      background-color: ${theme.colors.orange.main};
-      padding: 5px 15px;
-      border-radius: 0 0 0 10px;
-      transition: ${theme.transition.default};
-      cursor: pointer;
-
-      &:hover {
-        background-color: ${theme.colors.orange.dark};
-      }
-    }
-
-    #twoIcon {
-      position: absolute;
-      border-radius: 10px 0 0 0;
-      bottom: 0;
-    }
   `}
 `;
 
@@ -158,15 +75,8 @@ export const Observation = styled.div`
 
 export const ProductContent = styled.div`
   ${({ theme }) => css`
-    display: flex;
-    gap: 3rem;
-  `}
-`;
+    width: 850px;
 
-export const ProductArea = styled.div``;
-
-export const ProductResume = styled.div`
-  ${({ theme }) => css`
     input {
       background-color: ${theme.colors.orange.main};
       color: ${theme.colors.white};
@@ -186,36 +96,28 @@ export const ProductResume = styled.div`
   `}
 `;
 
-export const ProductResumeDelivery = styled.div``;
-
-export const ProductResumeContent = styled.div`
+export const ProductFinish = styled.div`
   ${({ theme }) => css`
-    width: 300px;
-    border: 2px solid ${theme.colors.gray.lighther};
-    background-color: ${theme.colors.gray.light};
+    padding-bottom: 5rem;
 
-    h3 {
-      text-align: center;
-      border-bottom: 2px solid ${theme.colors.gray.lighther};
+    .totalPrice {
+      display: flex;
+      margin-top: 3rem;
+      justify-content: space-between;
+      font-size: 20pt;
+      padding-bottom: 10px;
+      border-bottom: 2px solid;
     }
 
-    .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
-    }
+    .link {
+      margin-top: 3rem;
 
-    .total {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: ${theme.colors.gray.dark};
-      border-top: 2px solid ${theme.colors.gray.lighther};
-      padding: 0 10px;
-
-      h3 {
-        border-bottom: none;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        color: ${theme.colors.gray.light};
       }
     }
   `}

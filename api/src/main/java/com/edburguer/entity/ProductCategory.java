@@ -28,12 +28,10 @@ public class ProductCategory {
     @NotNull
     private String imageUrl;
 
-    @OneToMany(mappedBy = "category")
-    @JsonManagedReference
+    @OneToMany()
     private List<Option> options = new ArrayList<>();
 
-    @OneToMany(mappedBy = "productCategory")
-    @JsonManagedReference
+    @OneToMany()
     private List<Product> products = new ArrayList<>();
 
     public void addOption(Option option) {

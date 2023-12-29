@@ -15,7 +15,6 @@ export type OptionType = {
   name: string;
   maximumAmount: number;
   required: boolean;
-  optionsRequired: string | null;
   ingredients: IngredientType[];
 };
 
@@ -36,20 +35,22 @@ export type ProductCategoryType = {
   products: ProductType[];
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+interface Props {
+  data: ProductCategoryType[];
+}
+
+export default function myApp({ data }: Props) {
+  return <>{data && <HomeTemplate data={data} />}</>;
+}
+
+export async function getServerSideProps() {
   const res = await fetch(
     'http://localhost:8082/ed-burguer/product-categories'
   );
+
   const data: ProductCategoryType[] = await res.json();
 
   return {
     props: { data }
-    //revalidate: 60
   };
-};
-
-export default function myApp({
-  data
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <>{data && <HomeTemplate data={data} />}</>;
 }

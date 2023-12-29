@@ -1,14 +1,21 @@
 import { css, styled } from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.header`
   ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    grid-area: menu;
     width: 100%;
+    height: 60px;
+    padding: 10px;
+    position: fixed;
     background-color: ${theme.colors.white};
   `}
+`;
+
+export const LeftArea = styled.div`
+  display: flex;
+  gap: 3rem;
 `;
 
 export const Search = styled.div`

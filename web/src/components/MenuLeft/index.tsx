@@ -28,7 +28,10 @@ export function MenuLeft({ visible, closeMenu }: MenuLeftProps) {
           height={150}
           alt="Logo"
         />
-        <MenuLeftItem title="Av. Antônio Cabral de Souza, 6675, N. Sra.da Conceição, Paulista PE" />
+        <MenuLeftItem
+          title="Av. Antônio Cabral de Souza, 6675, N. Sra.da Conceição, Paulista PE"
+          icon={false}
+        />
         <MenuLeftItem title="Hórarios de atendimento">
           <S.HourItem className={date === 0 ? 'active' : ''}>
             <p>Domingo:</p>
@@ -83,7 +86,11 @@ export function MenuLeft({ visible, closeMenu }: MenuLeftProps) {
             <p>Dinheiro</p>
           </S.IconContainer>
         </MenuLeftItem>
-        <MenuLeftItem title="Região de entrega" />
+        <MenuLeftItem title="Região de entrega">
+          <p>Pau Amarelo</p>
+          <p>Beira Mar</p>
+          <p>Conceição</p>
+        </MenuLeftItem>
       </S.Content>
       <S.Overlay></S.Overlay>
     </S.Wrapper>

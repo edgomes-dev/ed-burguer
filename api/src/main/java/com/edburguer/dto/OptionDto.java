@@ -1,10 +1,16 @@
 package com.edburguer.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OptionDto {
     private Long id;
 
@@ -14,7 +20,7 @@ public class OptionDto {
 
     private Boolean required;
 
-    private String optionsRequired;
+    private Long productCategory;
 
     private List<Long> ingredients;
 }

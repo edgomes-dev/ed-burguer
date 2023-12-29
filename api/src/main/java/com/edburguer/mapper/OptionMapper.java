@@ -3,6 +3,7 @@ package com.edburguer.mapper;
 import com.edburguer.dto.OptionDto;
 import com.edburguer.entity.Ingredient;
 import com.edburguer.entity.Option;
+import com.edburguer.entity.ProductCategory;
 
 import java.util.List;
 
@@ -13,7 +14,6 @@ public class OptionMapper {
                 .name(dto.getName())
                 .maximumAmount(dto.getMaximumAmount())
                 .required(dto.getRequired())
-                .optionsRequired(dto.getOptionsRequired())
                 .ingredients(ingredientList)
                 .build();
     }

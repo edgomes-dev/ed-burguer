@@ -60,7 +60,7 @@ export const Slider = styled.div`
   }
 `;
 
-export const Item = styled.div`
+export const Item = styled.a`
   ${({ theme }) => css`
     background-color: ${theme.colors.gray.light};
     color: white;
@@ -75,6 +75,7 @@ export const Item = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    text-decoration: none;
   `}
 `;
 

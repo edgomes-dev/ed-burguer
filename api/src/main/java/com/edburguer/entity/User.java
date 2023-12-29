@@ -1,6 +1,7 @@
 package com.edburguer.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Data
+@ToString(exclude = "addresses")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -39,11 +41,11 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany
-    private List<Address> addresses  = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
     public void addAddress(Address data) {
-        this.addresses.add(data);
+        addresses.add(data);
     }
 
     @Override

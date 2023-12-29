@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { createGlobalStyle, css } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
@@ -43,6 +44,10 @@ export const GlobalStyle = createGlobalStyle`
       font-family: ${theme.font.family};
       background-color: ${theme.colors.gray.dark};
     }
+    body.modal-open {
+      overflow: hidden;
+    }
+
     body,
     input,
     button,

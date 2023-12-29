@@ -2,44 +2,28 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 type ProductType = {
-  image_url: string;
+  product_id: number;
   name: string;
-  quantity: number;
+  image_url: string;
+  observartion: string;
   price: number;
-  observartion?: string;
+  quantity: number;
+  order_options?: [
+    {
+      title: string;
+      ingredients: number[];
+    }
+  ];
 };
-const products: ProductType[] = [
-  {
-    image_url: '/img/02-08-2023-22-03-18hotdog-simples-min.jpg',
-    name: 'Cachorro quente simples',
-    quantity: 1,
-    price: 5.99,
-    observartion: 'Sem cebola'
-  },
-  {
-    image_url: '/img/02-08-2023-22-06-44hotdog-amoroso-min.jpg',
-    name: 'Cachorro quente Amoroso',
-    quantity: 2,
-    price: 16
-  },
-  {
-    image_url: '/img/02-08-2023-22-06-10hotdog-caprichoso-min.jpg',
-    name: 'Cachorro quente Caprichoso',
-    quantity: 1,
-    price: 29
-  }
-];
 
-interface ICart {
-  items: ProductType[];
-  quantityItems: number;
-  totalPrice: number;
+export interface ICart {
+  price: number;
+  products: ProductType[];
 }
 
 const initialState: ICart = {
-  items: products,
-  quantityItems: 3,
-  totalPrice: 50.99
+  price: 0,
+  products: []
 };
 
 export const cartSlice = createSlice({
@@ -47,7 +31,8 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.items.push(action.payload.item);
+      state.price += action.payload.price;
+      state.products.push(action.payload.product);
     }
   }
 });
