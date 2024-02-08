@@ -1,10 +1,10 @@
 import { AdminBasetemplate } from '@/templates/Admin/AdminBaseTemplate';
-import { OrderDetailsTemplate } from '@/templates/Admin/Order/Details/OrderDetailsTemplate';
+import { AdminOrdersTemplate } from '@/templates/Admin/AdminOrdersTemplate';
 
 export default function orderDetails() {
   return (
     <AdminBasetemplate>
-      <OrderDetailsTemplate />
+      <AdminOrdersTemplate />
     </AdminBasetemplate>
   );
 }

@@ -6,12 +6,15 @@ export const Wrapper = styled.aside`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: ${theme.colors.gray.dark};
+    background-color: ${theme.colors.gray.medium};
     padding: 4rem;
-    width: 120px;
+    width: 12%;
     height: 100%;
-    margin-top: 60px;
     position: fixed;
+
+    h1 {
+      color: ${theme.colors.white};
+    }
 
     ul {
       li {

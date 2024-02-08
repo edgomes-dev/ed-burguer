@@ -1,19 +1,17 @@
-import { useEffect } from 'react';
 import { parseCookies } from 'nookies';
-import Router from 'next/router';
 
 import { AdminBasetemplate } from '@/templates/Admin/AdminBaseTemplate';
-import { AdminOrdersTemplate } from '@/templates/Admin/AdminOrdersTemplate';
-import { GetServerSidePropsContext } from 'next';
+import { AdminIndexTemplate } from '@/templates/Admin/AdminIndexTemplate';
 
 export default function adminHome() {
   return (
     <AdminBasetemplate>
-      <AdminOrdersTemplate />
+      <AdminIndexTemplate />
     </AdminBasetemplate>
   );
 }
 
+/*
 export function getServerSideProps(context: GetServerSidePropsContext) {
   const { 'edburguer.token': token } = parseCookies(context);
 
@@ -29,4 +27,4 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {}
   };
-}
+}*/

@@ -7,7 +7,6 @@ export function AdminMenu() {
   return (
     <S.Wrapper>
       <S.LeftArea>
-        <h1>Ed Burguer</h1>
         <S.Search>
           <button type="submit">
             <SearchIcon size={15} />

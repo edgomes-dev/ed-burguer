@@ -38,10 +38,8 @@ export function ModalOrder({
   useEffect(() => {
     if (visible) {
       document.body.classList.toggle('modal-open', visible);
-      console.log('rolagem desativa, ', visible);
     } else {
       document.body.classList.remove('modal-open');
-      console.log('rolagem ativada ', visible);
     }
   }, [visible]);
 

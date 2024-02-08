@@ -1,26 +1,14 @@
 import Link from 'next/link';
 import * as S from './styles';
 
-import {
-  BsFillBoxFill as BoxOrders,
-  BsFillBagCheckFill as OrderHistory
-} from 'react-icons/bs';
-
-import {
-  AiOutlinePercentage as Offers,
-  AiFillHome as StockIcon
-} from 'react-icons/ai';
-import {
-  FiShoppingBag as ProductsIcon,
-  FiSettings as SettingsIcon
-} from 'react-icons/fi';
-import { BiMessageDetail as MessageIcon } from 'react-icons/bi';
-
-import { IoNewspaper } from 'react-icons/io5';
+import { BsFillBagCheckFill as OrderManager } from 'react-icons/bs';
+import { AiFillHome as StockIcon } from 'react-icons/ai';
+import { FiSettings as SettingsIcon } from 'react-icons/fi';
 
 export function AdminMenuLeft() {
   return (
     <S.Wrapper>
+      <h1>Ed Burguer</h1>
       <S.TopArea>
         <ul>
           <li>
@@ -29,23 +17,13 @@ export function AdminMenuLeft() {
             </Link>
           </li>
           <li>
-            <Link href="/admin/order/history">
-              <OrderHistory size={30} /> Pedidos
-            </Link>
-          </li>
-          <li>
-            <Link href="/admin/order/history">
-              <IoNewspaper size={30} /> Cardápio
+            <Link href="/admin/order/list/all">
+              <OrderManager size={30} /> Pedidos
             </Link>
           </li>
         </ul>
       </S.TopArea>
       <S.BottomArea>
-        <li>
-          <Link href="/">
-            <ProductsIcon size={30} /> Estoque
-          </Link>
-        </li>
         <li>
           <Link href="/">
             <SettingsIcon size={30} /> Settings

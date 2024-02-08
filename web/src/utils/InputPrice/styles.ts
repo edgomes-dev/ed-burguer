@@ -3,7 +3,7 @@ import { css, styled } from 'styled-components';
 type WrapperProps = {
   required: boolean;
 };
-export const Wrapper = styled.label<WrapperProps>`
+export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, required }) => css`
     input {
       display: ${required ? 'block' : 'none'};

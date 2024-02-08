@@ -14,19 +14,7 @@ export function AdminLoginTemplate() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (email === undefined || password === undefined) {
-      console.error('E-mail ou senha inválidos');
-      return;
-    }
-
-    try {
-      let data = await SignIn(email, password);
-      console.log('Token: ', data);
-
-      router.push('/');
-    } catch (error) {
-      console.error('Erro durante autenticação: ', error);
-    }
+    return console.log('Autenticado');
   }
 
   return (

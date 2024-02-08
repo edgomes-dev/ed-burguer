@@ -5,11 +5,13 @@ export const Wrapper = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    margin-left: 12%;
+    width: 90%;
     height: 60px;
     padding: 10px;
     position: fixed;
-    background-color: ${theme.colors.white};
+    background-color: ${theme.colors.gray.medium};
+    color: ${theme.colors.white};
   `}
 `;
 

@@ -61,8 +61,14 @@ export function ModalProduct({
   }
 
   useEffect(() => {
+    if (visible) {
+      document.body.classList.toggle('modal-open', visible);
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+
     setProductPrice(product.price * quantity + ingredientsPrice);
-  }, [product.price, quantity, ingredientsPrice]);
+  }, [visible, product.price, quantity, ingredientsPrice]);
 
   return (
     <S.Wrapper visible={visible}>
